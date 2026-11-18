@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFC933">
+<title>Bro</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1EEFB;--surface:#fff;--ink:#20174A;--mute:#6B6590;--free:#0E9F6E;--busy:#E4574B;--line:#DDD8F0;--accent:#FFC933;--on-ink:#F1EEFB;--on-accent:#20174A;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#14102B;--surface:#201A40;--ink:#F1EEFB;--mute:#A39DC9;--free:#3DDC9E;--busy:#FF7A6E;--line:#332B5E;--on-ink:#14102B;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:16px;line-height:1.4}
+button{font-family:inherit}
+button:disabled{opacity:.6}
+.app{max-width:480px;margin:0 auto;padding:20px 20px 100px}
+.logo{font-weight:800;font-size:34px;letter-spacing:-.03em;margin:0 0 2px}
+.sub{color:var(--mute);margin:0 0 14px}
+h2{font-size:19px;font-weight:800;margin:26px 0 8px}
+.hero{display:flex;flex-direction:column;align-items:center;margin:8px 0}
+.big{width:236px;height:236px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);font:800 33px/1.05 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.02em;cursor:pointer;transition:background .25s,box-shadow .25s,transform .1s;box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 25%,transparent)}
+.big:active{transform:scale(.96)}
+.big.on{background:var(--free);color:#06281C;box-shadow:0 0 0 14px color-mix(in srgb,var(--free) 25%,transparent)}
+.big small{display:block;font:400 14px/1.3 'Bricolage Grotesque',system-ui,sans-serif;margin-top:8px;letter-spacing:0}
+.status{margin:22px 0 0;font-weight:600;text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.lbl{color:var(--mute);font-size:14px;margin:16px 0 0}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.av{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;color:#fff;border:3px solid var(--busy)}
+.av.free{border-color:var(--free)}
+.av.maybe{border-color:var(--accent)}
+.sd{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;background:var(--busy)}
+.sd.free{background:var(--free)}
+.sd.maybe{background:var(--accent)}
+.row b{font-weight:600}
+.row .m{color:var(--mute);margin-left:auto;font-size:14px;text-align:right}
+.btn{border:2px solid var(--ink);background:transparent;color:var(--ink);font-weight:600;font-size:15px;padding:10px 16px;border-radius:999px;cursor:pointer}
+.btn.fill{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.x{border:0;padding:4px 10px;font-size:22px;color:var(--mute)}
+input{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;min-width:0}
+.f{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.tr{display:flex;gap:8px;align-items:center}
+.tr input{flex:1}
+.note{color:var(--mute);font-size:14px;margin:14px 0 0}
+.code{font-weight:800;font-size:28px;letter-spacing:.06em;margin:10px 0}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav div{display:flex;width:100%;max-width:480px}
+nav button{flex:1;border:0;background:none;color:var(--mute);font-weight:600;font-size:15px;padding:16px 0;cursor:pointer;border-top:3px solid transparent}
+nav button.on{color:var(--ink);border-top-color:var(--accent)}
+#push{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 10px);max-width:456px;margin:0 auto;background:var(--ink);color:var(--on-ink);border-radius:18px;padding:16px;transform:translateY(-170%);transition:transform .35s;z-index:20}
+#push.on{transform:none}
+#push .btn{color:var(--on-ink);border-color:var(--on-ink);margin:10px 8px 0 0}
+#push .btn.fill{background:var(--free);border-color:var(--free);color:#06281C}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 84px);transform:translateX(-50%);background:var(--ink);color:var(--on-ink);padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92%;text-align:center;z-index:20;font-weight:600}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="push"></div>
+<div class="app" id="view"></div>
+<nav style="display:none"><div id="tabs"></div></nav>
+<div id="toast"></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,onSnapshot,collection,query,where} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+const app=initializeApp({
+  apiKey:"AIzaSyB6vuyXVphxOAvsJ8fYi0zriwvMLwxt0o4",
+  authDomain:"bro-app-b1e03.firebaseapp.com",
+  projectId:"bro-app-b1e03",
+  storageBucket:"bro-app-b1e03.firebasestorage.app",
+  messagingSenderId:"1010750335719",
+  appId:"1:1010750335719:web:e96c02ac21a74d38d69042"
+});
+const auth=getAuth(app),db=getFirestore(app);
+
+const $=s=>document.querySelector(s);
+const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ACTS=['Egal','Kaffee','Sport','Zocken','Essen','Chillen'],DURS=[[60,'1 Std'],[120,'2 Std'],[240,'4 Std'],[0,'Offen']],COL=['#5B3FD9','#C2418D','#2A7FBA','#B4691F','#3E8E5A'];
+const hm=ms=>new Date(ms).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+const S={user:null,me:null,fr:{},pairs:{},replies:[],tab:'home',dur:120,act:0,mode:'login',err:'',busy:false,em:'',pw:'',nm:'',codeIn:'',ready:false,banner:null};
+let unsubs=[],fl={};
+
+const eff=d=>!d?'maybe':(d.status==='free'&&d.freeUntil&&Date.now()>d.freeUntil)?'maybe':(d.status||'maybe');
+const av=(n,s)=>'<span class="av '+s+'" style="background:'+COL[(n||'?').charCodeAt(0)%COL.length]+'">'+esc((n||'?')[0].toUpperCase())+'</span>';
+const stText=d=>{const s=eff(d);return s==='free'?'Verfügbar'+(d.freeUntil?' bis '+hm(d.freeUntil):'')+(d.act>0?', Lust auf '+ACTS[d.act]:''):s==='busy'?'Beschäftigt':'Eventuell verfügbar'};
+const chips=(list,cur,a)=>'<div class="chips">'+list.map((x,i)=>{const k=typeof x==='string'?i:x[0],l=typeof x==='string'?x:x[1];return'<button class="chip'+(k===cur?' on':'')+'" data-a="'+a+'" data-v="'+k+'">'+l+'</button>'}).join('')+'</div>';
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),2800)}
+const gen=()=>{const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let c='BRO-';for(let i=0;i<4;i++)c+=a[Math.floor(Math.random()*a.length)];return c};
+
+/* Konto und Profil */
+const AE={'auth/invalid-credential':'E-Mail oder Passwort stimmt nicht.','auth/email-already-in-use':'Diese E-Mail ist schon registriert.','auth/weak-password':'Das Passwort braucht mindestens 6 Zeichen.','auth/invalid-email':'Bitte eine gültige E-Mail eingeben.','auth/network-request-failed':'Keine Verbindung. Bitte später nochmal versuchen.','auth/too-many-requests':'Zu viele Versuche. Bitte kurz warten.','auth/unauthorized-domain':'Diese Adresse ist in Firebase noch nicht freigegeben (Autorisierte Domains).'};
+async function submit(){
+  S.err='';S.busy=true;render();
+  try{
+    if(S.mode==='reg'){
+      if(!S.nm.trim())throw{message:'Bitte gib einen Namen ein.'};
+      await createUserWithEmailAndPassword(auth,S.em.trim(),S.pw);
+    }else await signInWithEmailAndPassword(auth,S.em.trim(),S.pw);
+  }catch(e){S.err=AE[e.code]||e.message||'Das hat nicht geklappt.'}
+  S.busy=false;render();
+}
+async function ensureUser(u){
+  const r=doc(db,'users',u.uid);
+  if((await getDoc(r)).exists())return;
+  const name=(S.nm||u.displayName||u.email.split('@')[0]).trim();
+  for(let i=0;i<8;i++){
+    const code=gen();
+    try{
+      await setDoc(doc(db,'codes',code),{uid:u.uid,name:name});
+      await setDoc(r,{name:name,code:code,status:'maybe',freeUntil:0,freeSince:0,act:0});
+      return;
+    }catch(e){if(e.code!=='permission-denied')throw e}
+  }
+  throw new Error('Kein freier Code gefunden');
+}
+function listen(u){
+  unsubs.push(onSnapshot(doc(db,'users',u.uid),s=>{S.me=s.data()||null;render()}));
+  unsubs.push(onSnapshot(collection(db,'users',u.uid,'replies'),s=>{S.replies=s.docs.map(d=>Object.assign({id:d.id},d.data()));render()}));
+  unsubs.push(onSnapshot(query(collection(db,'friendships'),where('members','array-contains',u.uid)),s=>{
+    const ids=[];S.pairs={};
+    s.docs.forEach(d=>{const o=d.data().members.find(m=>m!==u.uid);if(o){ids.push(o);S.pairs[o]=d.id}});
+    ids.forEach(id=>{
+      if(fl[id])return;
+      fl[id]=onSnapshot(doc(db,'users',id),d=>{
+        const v=d.data();if(!v)return;
+        const p=S.fr[id];S.fr[id]=v;
+        if(p&&v.status==='free'&&v.freeSince!==p.freeSince&&eff(v)==='free'){
+          S.banner={id:id,name:v.name,act:v.act,until:v.freeUntil,since:v.freeSince};
+          if(navigator.vibrate)navigator.vibrate(200);
+        }
+        render();
+      },e=>console.warn(e));
+    });
+    Object.keys(fl).forEach(id=>{if(ids.indexOf(id)<0){fl[id]();delete fl[id];delete S.fr[id]}});
+    render();
+  }));
+}
+onAuthStateChanged(auth,async u=>{
+  unsubs.forEach(f=>f());Object.keys(fl).forEach(k=>fl[k]());unsubs=[];fl={};
+  Object.assign(S,{user:u,me:null,fr:{},pairs:{},replies:[],banner:null});
+  if(u){
+    try{await ensureUser(u);listen(u)}
+    catch(e){console.error(e);S.err='Die Datenbank ist nicht erreichbar. Sind Firestore und die Regeln eingerichtet?'}
+  }
+  S.ready=true;render();
+});
+
+/* Aktionen */
+async function setStatus(o){await updateDoc(doc(db,'users',S.user.uid),o)}
+async function press(){
+  if(eff(S.me)==='free'){await setStatus({status:'maybe',freeUntil:0});return}
+  const now=Date.now();
+  await setStatus({status:'free',freeUntil:S.dur?now+S.dur*60000:0,freeSince:now,act:S.act});
+  toast(Object.keys(S.pairs).length?'Deine Homies sehen es jetzt':'Noch keine Homies, füge zuerst welche hinzu');
+}
+async function busy(){await setStatus({status:eff(S.me)==='busy'?'maybe':'busy',freeUntil:0})}
+async function answer(ok){
+  const b=S.banner;S.banner=null;render();if(!b)return;
+  await setDoc(doc(db,'users',b.id,'replies',S.user.uid),{ok:ok,name:S.me.name,since:b.since,at:Date.now()});
+  toast(ok?b.name+' weiß Bescheid: Du bist dabei':b.name+' weiß Bescheid: Heute nicht');
+}
+async function addHomie(){
+  let code=S.codeIn.trim().toUpperCase();if(!code)return;
+  if(code.indexOf('BRO-')!==0)code='BRO-'+code;
+  const c=await getDoc(doc(db,'codes',code));
+  if(!c.exists()){toast('Diesen Code gibt es nicht');return}
+  const o=c.data().uid;
+  if(o===S.user.uid){toast('Das ist dein eigener Code');return}
+  if(S.pairs[o]){toast('Ihr seid schon verbunden');return}
+  const ids=[S.user.uid,o].sort();
+  await setDoc(doc(db,'friendships',ids.join('_')),{members:ids});
+  S.codeIn='';toast(c.data().name+' ist jetzt dein Homie');
+}
+async function rm(id){if(!confirm('Homie wirklich entfernen?'))return;await deleteDoc(doc(db,'friendships',S.pairs[id]))}
+async function copy(){try{await navigator.clipboard.writeText(S.me.code);toast('Code kopiert')}catch(e){toast('Code: '+S.me.code)}}
+const H={mode:()=>{S.mode=S.mode==='login'?'reg':'login';S.err='';render()},submit:submit,tab:v=>{S.tab=v;render()},dur:v=>{S.dur=+v;render()},act:v=>{S.act=+v;render()},press:press,busy:busy,add:addHomie,copy:copy,out:()=>signOut(auth),rm:rm,yes:()=>answer(true),no:()=>answer(false)};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&H[b.dataset.a])Promise.resolve(H[b.dataset.a](b.dataset.v)).catch(err=>{console.error(err);toast('Das hat nicht geklappt. Bitte nochmal versuchen.')})});
+document.addEventListener('input',e=>{const k=e.target.dataset.k;if(k)S[k]=e.target.value});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const k=e.target.dataset&&e.target.dataset.k;if(k==='codeIn')H.add();else if(k)H.submit()});
+setInterval(()=>{if(S.user&&S.me&&!(document.activeElement&&document.activeElement.tagName==='INPUT'))render()},30000);
+
+/* Ansichten */
+function render(){
+  const v=$('#view');
+  if(!S.ready){v.innerHTML='<p class="note">Lädt …</p>';return}
+  $('nav').style.display=S.user?'':'none';
+  const pb=$('#push');
+  if(S.banner&&S.user){pb.innerHTML='<b>'+esc(S.banner.name)+' hat Zeit</b><div>'+(S.banner.act>0?'Lust auf '+ACTS[S.banner.act]+'? ':'')+(S.banner.until?'Frei bis '+hm(S.banner.until)+'.':'')+'</div><button class="btn fill" data-a="yes">Bin dabei</button><button class="btn" data-a="no">Heute nicht</button>';pb.classList.add('on')}
+  else pb.classList.remove('on');
+  if(!S.user){
+    v.innerHTML='<h1 class="logo">bro</h1><p class="sub">Sag deinen Homies, wann du Zeit hast.</p><div class="f">'+
+      (S.mode==='reg'?'<input data-k="nm" placeholder="Dein Name" value="'+esc(S.nm)+'" autocomplete="nickname">':'')+
+      '<input data-k="em" type="email" placeholder="E-Mail" value="'+esc(S.em)+'" autocomplete="email">'+
+      '<input data-k="pw" type="password" placeholder="Passwort (mindestens 6 Zeichen)" value="'+esc(S.pw)+'" autocomplete="'+(S.mode==='reg'?'new-password':'current-password')+'">'+
+      (S.err?'<p class="note" style="color:var(--busy);margin:0">'+esc(S.err)+'</p>':'')+
+      '<button class="btn fill" data-a="submit"'+(S.busy?' disabled':'')+'>'+(S.mode==='reg'?'Registrieren':'Anmelden')+'</button>'+
+      '<button class="btn x" style="font-size:15px" data-a="mode">'+(S.mode==='reg'?'Schon ein Konto? Anmelden':'Neu hier? Konto erstellen')+'</button></div>';
+    return;
+  }
+  const me=S.me;
+  if(!me){v.innerHTML='<h1 class="logo">bro</h1><p class="note">'+esc(S.err||'Profil wird eingerichtet …')+'</p><button class="btn" data-a="out">Abmelden</button>';return}
+  const s=eff(me);
+  let h='';
+  if(S.tab==='home'){
+    const free=s==='free',line=free?'Du bist verfügbar'+(me.freeUntil?' bis '+hm(me.freeUntil):''):s==='busy'?'Du bist als beschäftigt gemeldet':'Eventuell verfügbar, noch nicht gemeldet';
+    h='<h1 class="logo">bro</h1><p class="sub">Hallo '+esc(me.name)+'!</p><div class="hero"><button class="big'+(free?' on':'')+'" data-a="press">'+(free?'Du hast Zeit<small>Tippen zum Beenden</small>':'Ich hab Zeit<small>Homies sehen es sofort</small>')+'</button><p class="status"><span class="sd '+s+'"></span>'+line+'</p></div>';
+    if(free){
+      const rs=S.replies.filter(r=>r.since===me.freeSince);
+      h+='<h2>Wer ist dabei?</h2>'+(rs.length?rs.map(r=>'<div class="row">'+av(r.name,r.ok?'free':'busy')+'<b>'+esc(r.name)+'</b><span class="m">'+(r.ok?'Bin dabei':'Heute nicht')+'</span></div>').join(''):'<p class="note">Warte auf Antworten …</p>');
+    }else h+='<p class="lbl">Wie lange?</p>'+chips(DURS,S.dur,'dur')+'<p class="lbl">Worauf hast du Lust?</p>'+chips(ACTS,S.act,'act')+'<button class="btn" style="margin-top:22px" data-a="busy">'+(s==='busy'?'Doch nicht beschäftigt':'Ich bin beschäftigt')+'</button>';
+  }else{
+    const ids=Object.keys(S.pairs),rank={free:0,maybe:1,busy:2};
+    ids.sort((a,b)=>rank[eff(S.fr[a])]-rank[eff(S.fr[b])]);
+    const n=ids.filter(id=>eff(S.fr[id])==='free').length;
+    h='<h1 class="logo">Homies</h1><p class="sub">'+(ids.length?n+' von '+ids.length+' sind verfügbar.':'Noch keine Homies.')+'</p>'+
+      '<p class="lbl" style="margin:0">So sehen dich deine Homies</p><div class="row">'+av('Du',s)+'<b>Du</b><span class="m">'+stText(me)+'</span></div><p class="lbl">Deine Homies</p>'+
+      (ids.length?ids.map(id=>{const f=S.fr[id]||{name:'…'};return'<div class="row">'+av(f.name,eff(f))+'<b>'+esc(f.name)+'</b><span class="m">'+(S.fr[id]?stText(f):'')+'</span><button class="btn x" aria-label="Homie entfernen" data-a="rm" data-v="'+id+'">×</button></div>'}).join(''):'<p class="note" style="margin-top:6px">Schick deinen Code an einen Freund oder gib unten seinen Code ein.</p>')+
+      '<h2>Homie hinzufügen</h2><div class="tr"><input data-k="codeIn" placeholder="Code, zum Beispiel BRO-AB12" value="'+esc(S.codeIn)+'" autocapitalize="characters"><button class="btn fill" data-a="add">Hinzufügen</button></div>'+
+      '<h2>Dein Code</h2><p class="note" style="margin-top:0">Schick ihn deinen Homies, dann können sie dich hinzufügen.</p><div class="code">'+esc(me.code)+'</div><button class="btn fill" data-a="copy">Code kopieren</button>'+
+      '<h2>Konto</h2><button class="btn" data-a="out">Abmelden</button>';
+  }
+  v.innerHTML=h;
+  $('#tabs').innerHTML=[['home','Start'],['friends','Homies']].map(t=>'<button class="'+(S.tab===t[0]?'on':'')+'" data-a="tab" data-v="'+t[0]+'">'+t[1]+'</button>').join('');
+}
+render();
+</script>
+</body>
+</html>
