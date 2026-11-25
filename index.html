@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FFC933">
+<meta name="theme-color" content="#0866FF">
 <title>Bro</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F1EEFB;--surface:#fff;--ink:#20174A;--mute:#6B6590;--free:#0E9F6E;--busy:#E4574B;--line:#DDD8F0;--accent:#FFC933;--on-ink:#F1EEFB;--on-accent:#20174A;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root{--bg:#14102B;--surface:#201A40;--ink:#F1EEFB;--mute:#A39DC9;--free:#3DDC9E;--busy:#FF7A6E;--line:#332B5E;--on-ink:#14102B;color-scheme:dark}}
+:root{--bg:#fff;--surface:#F0F2F5;--ink:#1C1E21;--mute:#65676B;--free:#25D366;--busy:#FA383E;--maybe:#F7B928;--line:#DADDE1;--accent:#0866FF;--on-ink:#F0F2F5;--on-accent:#fff;--chatbg:#EFEAE2;--bme:#D9FDD3;--bme-t:#1C1E21;--bother:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#18191A;--surface:#242526;--ink:#E4E6EB;--mute:#B0B3B8;--free:#31D07A;--busy:#FF6B70;--maybe:#F7B928;--line:#3E4042;--accent:#2374E1;--on-ink:#18191A;--on-accent:#fff;--chatbg:#0B141A;--bme:#005C4B;--bme-t:#E4E6EB;--bother:#242526;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#18191A;--surface:#242526;--ink:#E4E6EB;--mute:#B0B3B8;--free:#31D07A;--busy:#FF6B70;--maybe:#F7B928;--line:#3E4042;--accent:#2374E1;--on-ink:#18191A;--on-accent:#fff;--chatbg:#0B141A;--bme:#005C4B;--bme-t:#E4E6EB;--bother:#242526;color-scheme:dark}
 *,*::before,*::after{box-sizing:inherit}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:16px;line-height:1.4}
@@ -19,7 +20,7 @@ button:disabled{opacity:.6}
 .sub{color:var(--mute);margin:0 0 14px}
 h2{font-size:19px;font-weight:800;margin:26px 0 8px}
 .hero{display:flex;flex-direction:column;align-items:center;margin:8px 0}
-.big{width:236px;height:236px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);font:800 33px/1.05 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.02em;cursor:pointer;transition:background .25s,box-shadow .25s,transform .1s;box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 25%,transparent)}
+.big{width:236px;height:236px;border-radius:50%;border:0;background:linear-gradient(135deg,#DD2A7B,#8134AF,#515BD4);color:#fff;font:800 33px/1.05 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.02em;cursor:pointer;transition:background .25s,box-shadow .25s,transform .1s;box-shadow:0 0 0 10px rgba(221,42,123,.18)}
 .big:active{transform:scale(.96)}
 .big.on{background:var(--free);color:#06281C;box-shadow:0 0 0 14px color-mix(in srgb,var(--free) 25%,transparent)}
 .big small{display:block;font:400 14px/1.3 'Bricolage Grotesque',system-ui,sans-serif;margin-top:8px;letter-spacing:0}
@@ -32,10 +33,11 @@ h2{font-size:19px;font-weight:800;margin:26px 0 8px}
 .row:last-child{border-bottom:0}
 .av{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;color:#fff;border:3px solid var(--busy)}
 .av.free{border-color:var(--free)}
-.av.maybe{border-color:var(--accent)}
+.av.maybe{border-color:var(--maybe)}
+.av.off{border-color:var(--line)}
 .sd{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;background:var(--busy)}
 .sd.free{background:var(--free)}
-.sd.maybe{background:var(--accent)}
+.sd.maybe{background:var(--maybe)}
 .row b{font-weight:600}
 .row .m{color:var(--mute);margin-left:auto;font-size:14px;text-align:right}
 .btn{border:2px solid var(--ink);background:transparent;color:var(--ink);font-weight:600;font-size:15px;padding:10px 16px;border-radius:999px;cursor:pointer}
@@ -48,6 +50,22 @@ input{font:inherit;color:var(--ink);background:var(--surface);border:1px solid v
 .note{color:var(--mute);font-size:14px;margin:14px 0 0}
 .code{font-weight:800;font-size:28px;letter-spacing:.06em;margin:10px 0}
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tr span{min-width:96px;font-weight:600}
+.tl{position:relative;height:34px;border-radius:12px;background:var(--surface);border:1px solid var(--line);overflow:hidden;margin:10px 0 4px}
+.tl i{position:absolute;top:0;bottom:0;opacity:.88}
+.tl u{position:absolute;top:0;bottom:0;width:3px;background:var(--ink);text-decoration:none}
+.ticks{display:flex;justify-content:space-between;color:var(--mute);font-size:12px}
+.ev{display:flex;align-items:center;gap:12px;padding:12px 8px 12px 14px;margin-top:10px;background:var(--surface);border-radius:14px;border-left:6px solid var(--accent)}
+.ev .t{font-weight:800;font-size:15px;min-width:104px}
+#fx{position:fixed;inset:0;pointer-events:none;display:grid;place-items:center;z-index:30}
+.fxi{grid-area:1/1;font-size:76px;line-height:1;opacity:0}
+.fx-fly{animation:fxfly 1.6s ease-in-out forwards}
+.fx-wob{animation:fxwob 1.6s ease-in-out forwards}
+.fx-pul{animation:fxpul 1.6s ease-in-out forwards}
+@keyframes fxfly{0%{opacity:0;transform:translate(-130px,50px) scale(.5) rotate(0)}15%{opacity:1}50%{transform:translate(0,-70px) scale(1.2) rotate(220deg)}85%{opacity:1}100%{opacity:0;transform:translate(130px,50px) scale(.5) rotate(440deg)}}
+@keyframes fxwob{0%{opacity:0;transform:scale(.3)}15%{opacity:1;transform:scale(1.1)}30%{transform:rotate(-14deg)}45%{transform:rotate(14deg)}60%{transform:rotate(-9deg)}75%{opacity:1;transform:rotate(6deg) scale(1)}100%{opacity:0;transform:scale(1) translateY(-30px)}}
+@keyframes fxpul{0%{opacity:0;transform:scale(.4)}15%{opacity:1;transform:scale(1.3) rotate(-8deg)}35%{transform:scale(1) rotate(8deg)}55%{transform:scale(1.25) rotate(-6deg)}75%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){#fx{display:none}}
 nav div{display:flex;width:100%;max-width:480px}
 nav button{flex:1;border:0;background:none;color:var(--mute);font-weight:600;font-size:15px;padding:16px 0;cursor:pointer;border-top:3px solid transparent}
 nav button.on{color:var(--ink);border-top-color:var(--accent)}
@@ -55,20 +73,27 @@ nav button.on{color:var(--ink);border-top-color:var(--accent)}
 #push.on{transform:none}
 #push .btn{color:var(--on-ink);border-color:var(--on-ink);margin:10px 8px 0 0}
 #push .btn.fill{background:var(--free);border-color:var(--free);color:#06281C}
-#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 84px);transform:translateX(-50%);background:var(--ink);color:var(--on-ink);padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92%;text-align:center;z-index:20;font-weight:600}
+#toast{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;bottom:calc(env(safe-area-inset-bottom,0px) + 84px);background:var(--ink);color:var(--on-ink);padding:10px 18px;border-radius:18px;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92%;text-align:center;z-index:20;font-weight:600}
 #toast.on{opacity:1}
+.big.sm{width:116px;height:116px;padding:0;font-size:22px;flex:none;box-shadow:0 0 0 7px rgba(221,42,123,.18)}
+.big.sm.on{box-shadow:0 0 0 7px color-mix(in srgb,var(--free) 25%,transparent)}
+.qr{background:#fff;padding:12px;border-radius:12px;width:210px;margin:12px auto}
+.qr svg{display:block;width:100%;height:auto}
+nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;padding:10px 0 8px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 </head>
 <body>
 <div id="push"></div>
 <div class="app" id="view"></div>
 <nav style="display:none"><div id="tabs"></div></nav>
 <div id="toast"></div>
+<div id="fx" aria-hidden="true"></div>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,onSnapshot,collection,query,where} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,EmailAuthProvider,reauthenticateWithCredential,updatePassword,verifyBeforeUpdateEmail,deleteUser} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,onSnapshot,collection,query,where,getDocs} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const app=initializeApp({
   apiKey:"AIzaSyB6vuyXVphxOAvsJ8fYi0zriwvMLwxt0o4",
@@ -82,20 +107,495 @@ const auth=getAuth(app),db=getFirestore(app);
 
 const $=s=>document.querySelector(s);
 const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const ACTS=['Egal','Kaffee','Sport','Zocken','Essen','Chillen'],DURS=[[60,'1 Std'],[120,'2 Std'],[240,'4 Std'],[0,'Offen']],COL=['#5B3FD9','#C2418D','#2A7FBA','#B4691F','#3E8E5A'];
+const ACTS=['Egal','Kaffee','Sport','Zocken','Essen','Chillen'],ACTI=[['Egal','🙂'],['Kaffee','☕'],['Sport','🏋️'],['Fußball','⚽'],['Zocken','🎮'],['Essen','🍕'],['Chillen','🛋️']],EMO=['🙂','☕','🏋️','🎮','🍕','🛋️','🎬','🍻','🚶','🎲','📚','🎵','⚽'],DURS=[[60,'1 Std'],[120,'2 Std'],[240,'4 Std'],[0,'Offen']],COL=['#5B3FD9','#C2418D','#2A7FBA','#B4691F','#3E8E5A'];
+const actOf=d=>d.actLabel||(d.act>0?ACTS[d.act]:'');
 const hm=ms=>new Date(ms).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
-const S={user:null,me:null,fr:{},pairs:{},replies:[],tab:'home',dur:120,act:0,mode:'login',err:'',busy:false,em:'',pw:'',nm:'',codeIn:'',ready:false,banner:null};
+const S={user:null,me:null,fr:{},pairs:{},replies:[],series:[],ex:{},calLoaded:false,customs:[],addingAct:false,meets:[],laterOpen:false,lDay:'today',lTime:'',ans:{},showExp:false,events:[],votes:{},evAdding:false,evf:null,reqIn:[],reqOut:[],chatWith:null,chats:[],msgs:[],chatDraft:'',cats:[],catName:'',pings:{},showQr:false,pendingAdd:'',pwCur:'',pwNew:'',emNew:'',pwDel:'',setName:'',delOpen:false,newActL:'',newActI:'🙂',wk:0,sel:null,adding:false,fmode:'once',f:{},addDays:[],del:null,tab:'home',dur:120,act:0,mode:'login',err:'',busy:false,em:'',pw:'',nm:'',codeIn:'',ready:false,banner:null};
 let unsubs=[],fl={};
+try{const q=new URLSearchParams(location.search).get('add');if(q){S.pendingAdd=q;history.replaceState(null,'',location.pathname)}}catch(e){}
 
-const eff=d=>!d?'maybe':(d.status==='free'&&d.freeUntil&&Date.now()>d.freeUntil)?'maybe':(d.status||'maybe');
-const av=(n,s)=>'<span class="av '+s+'" style="background:'+COL[(n||'?').charCodeAt(0)%COL.length]+'">'+esc((n||'?')[0].toUpperCase())+'</span>';
-const stText=d=>{const s=eff(d);return s==='free'?'Verfügbar'+(d.freeUntil?' bis '+hm(d.freeUntil):'')+(d.act>0?', Lust auf '+ACTS[d.act]:''):s==='busy'?'Beschäftigt':'Eventuell verfügbar'};
+const blockOf=d=>{const n=Date.now();return ((d&&d.busy)||[]).find(b=>b.s<=n&&n<b.e)};
+const eff=d=>{if(!d)return 'maybe';const n=Date.now();if(d.status==='free'&&!(d.freeUntil&&n>d.freeUntil))return 'free';if(d.status==='busy')return 'busy';return blockOf(d)?'busy':'maybe'};
+const av=(n,s,ph,sz)=>{sz=sz||42;return'<span class="av '+s+'" style="width:'+sz+'px;height:'+sz+'px;font-size:'+Math.round(sz*.4)+'px;'+(ph?'background:#ccc url('+ph+') center/cover':'background:'+COL[(n||'?').charCodeAt(0)%COL.length])+'">'+(ph?'':esc((n||'?')[0].toUpperCase()))+'</span>'};
+const stText=d=>{const s=eff(d);return s==='free'?'Verfügbar'+(d.freeUntil?' bis '+hm(d.freeUntil):'')+(actOf(d)?', Lust auf '+(d.actIcon?d.actIcon+' ':'')+actOf(d):''):s==='busy'?(d.status!=='busy'&&blockOf(d)?'Beschäftigt bis '+hm(blockOf(d).e):'Beschäftigt'):'Eventuell verfügbar'};
 const chips=(list,cur,a)=>'<div class="chips">'+list.map((x,i)=>{const k=typeof x==='string'?i:x[0],l=typeof x==='string'?x:x[1];return'<button class="chip'+(k===cur?' on':'')+'" data-a="'+a+'" data-v="'+k+'">'+l+'</button>'}).join('')+'</div>';
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),2800)}
 const gen=()=>{const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let c='BRO-';for(let i=0;i<4;i++)c+=a[Math.floor(Math.random()*a.length)];return c};
 
+/* Kalender */
+const DN=['Mo','Di','Mi','Do','Fr','Sa','So'],DNL=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'],SC={F:'#2A7FBA',S:'#B4691F',N:'#5B3FD9'};
+const ds=d=>d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
+const pd=s=>{const p=s.split('-');return new Date(+p[0],p[1]-1,+p[2])};
+const addD=(d,k)=>{const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()+k);return x};
+const dayIdx=d=>(d.getDay()+6)%7;
+const mins=t=>{const p=t.split(':');return +p[0]*60+ +p[1]};
+const fmtD=d=>d.toLocaleDateString('de-DE',{day:'numeric',month:'short'});
+let lastBusy='';
+
+function startsBase(d){
+  const k=ds(d),r=[];
+  S.series.forEach(x=>{
+    if(k<x.from||(x.until&&k>x.until)||(S.ex[x.id]||[]).indexOf(k)>-1)return;
+    let t,n=x.n,c='';
+    if(x.kind==='once'){if(k!==x.from)return;t=[x.s,x.e]}
+    else if(x.kind==='week'){if(x.days.indexOf(dayIdx(d))<0)return;t=[x.s,x.e]}
+    else{c=x.cycle[Math.round((pd(k)-pd(x.from))/864e5)%x.cycle.length];if(c==='-')return;const y=x.times[c];t=[y.s,y.e];n=y.n}
+    r.push({x:x,n:n,c:c,s:t[0],e:t[1],k:k});
+  });
+  return r;
+}
+function dayList(d){
+  const r=[];
+  starts(d).forEach(o=>{const a=mins(o.s),b=mins(o.e);r.push({o:o,from:a,to:b>a?b:1440,ts:o.s,te:b>a?o.e:'24:00'})});
+  starts(addD(d,-1)).forEach(o=>{const a=mins(o.s),b=mins(o.e);if(b<a)r.push({o:o,from:0,to:b,ts:'00:00',te:o.e})});
+  return r.sort((x,y)=>x.from-y.from);
+}
+/* Nur Zeitblöcke ohne Namen werden mit den Homies geteilt */
+function busyBlocks(){
+  const t0=addD(new Date(),0),r=[];
+  for(let i=0;i<14;i++){
+    const d=addD(t0,i);
+    dayList(d).forEach(l=>r.push({s:new Date(d.getFullYear(),d.getMonth(),d.getDate(),0,l.from).getTime(),e:new Date(d.getFullYear(),d.getMonth(),d.getDate(),0,l.to).getTime()}));
+  }
+  r.sort((a,b)=>a.s-b.s);
+  const m=[];
+  r.forEach(b=>{const l=m[m.length-1];if(l&&b.s<=l.e)l.e=Math.max(l.e,b.e);else m.push({s:b.s,e:b.e})});
+  return m.filter(b=>b.e>Date.now());
+}
+async function syncBusy(){
+  if(!S.user||!S.calLoaded)return;
+  const b=busyBlocks(),j=JSON.stringify(b);
+  if(j===lastBusy)return;
+  lastBusy=j;
+  try{await updateDoc(doc(db,'users',S.user.uid),{busy:b})}catch(e){console.warn(e);lastBusy=''}
+}
+async function saveCal(){
+  await setDoc(doc(db,'users',S.user.uid,'private','calendar'),{series:S.series,ex:S.ex});
+  await syncBusy();
+}
+setInterval(syncBusy,3600000);
+
+function viewDate(){const now=new Date();return addD(now,-dayIdx(now)+7*S.wk+(S.sel==null?dayIdx(now):S.sel))}
+function openForm(mode,n){
+  const d=viewDate(),f={n:n||'',s:'09:00',e:'17:00',until:'',cyc:'FFSSNN----',fs:'06:00',fe:'14:00',ss:'14:00',se:'22:00',ns:'22:00',ne:'06:00',start:ds(d)};
+  S.addDays=[dayIdx(d)];
+  if(n==='Sport'){f.s='18:00';f.e='19:30'}
+  if(n==='Schlafen'){f.s='22:00';f.e='07:00';S.addDays=[0,1,2,3,4,5,6]}
+  S.f=f;S.fmode=mode;S.adding=true;render();
+}
+async function saveEvent(){
+  const f=S.f,id='s'+Date.now(),now=new Date(),mon=addD(now,-dayIdx(now)+7*S.wk);
+  if(S.fmode==='shift'){
+    const cyc=f.cyc.toUpperCase().replace(/[^FSN]/g,'-');
+    if(!/[FSN]/.test(cyc)||!f.start){toast('Bitte Muster und Startdatum angeben');return}
+    if(!f.fs||!f.fe||!f.ss||!f.se||!f.ns||!f.ne){toast('Bitte alle Schichtzeiten ausfüllen');return}
+    S.series.push({id:id,kind:'shift',n:'Schichtplan',from:f.start,cycle:cyc.split(''),times:{F:{n:'Frühschicht',s:f.fs,e:f.fe},S:{n:'Spätschicht',s:f.ss,e:f.se},N:{n:'Nachtschicht',s:f.ns,e:f.ne}}});
+  }else{
+    if(!f.n.trim()||!f.s||!f.e||f.s===f.e){toast('Bitte Name und gültige Zeit eintragen');return}
+    const x={id:id,n:f.n.trim(),s:f.s,e:f.e};
+    if(S.fmode==='once'){x.kind='once';x.from=ds(viewDate())}
+    else{if(!S.addDays.length){toast('Bitte mindestens einen Tag wählen');return}x.kind='week';x.days=S.addDays.slice();x.from=ds(mon);x.until=f.until||''}
+    S.series.push(x);
+  }
+  S.adding=false;render();
+  await saveCal();
+  toast(S.fmode==='once'?'Termin gespeichert':'Serie gespeichert');
+}
+async function delOcc(v){
+  const p=v.split('|'),x=S.series.filter(s=>s.id===p[0])[0];
+  if(x&&x.kind==='once')return delSeries(p[0]);
+  S.del=v;render();
+}
+async function skipOcc(v){
+  const p=v.split('|');
+  (S.ex[p[0]]=S.ex[p[0]]||[]).push(p[1]);
+  S.del=null;render();
+  await saveCal();toast('Termin gelöscht, Serie bleibt');
+}
+async function delSeries(id){
+  S.series=S.series.filter(s=>s.id!==id);delete S.ex[id];S.del=null;render();
+  await saveCal();toast('Gelöscht');
+}
+function rule(x){
+  if(x.kind==='shift')return'Schichtplan ab '+fmtD(pd(x.from))+': '+x.cycle.join(' ');
+  const a=x.days.slice().sort(),s=a.join();
+  return(a.length===7?'Täglich':s==='0,1,2,3,4'?'Mo–Fr':s==='5,6'?'Wochenende':a.map(i=>DN[i]).join(', '))+', '+x.s+'–'+x.e+(x.until?', bis '+fmtD(pd(x.until)):'');
+}
+function formView(){
+  const f=S.f,m=S.fmode;
+  const inp=(k,t,ph)=>'<input type="'+t+'" value="'+esc(f[k]||'')+'" placeholder="'+(ph||'')+'" data-k="f.'+k+'">';
+  const tr=(l,a,b)=>'<div class="tr"><span>'+l+'</span>'+inp(a,'time')+inp(b,'time')+'</div>';
+  let h='<div class="f"><div class="chips" style="margin:0">'+[['once','Einmalig'],['series','Serie'],['shift','Schichtplan']].map(x=>'<button class="chip'+(m===x[0]?' on':'')+'" data-a="fmode" data-v="'+x[0]+'">'+x[1]+'</button>').join('')+'</div>';
+  if(m==='shift'){
+    h+='<p class="note" style="margin:0">Muster wählen oder selbst tippen: F = Früh, S = Spät, N = Nacht, – = frei. Jeder Buchstabe steht für einen Tag.</p><div class="chips" style="margin:0">'+[['FFSSNN----','Wechselschicht'],['FFFFF--SSSSS--','Früh/Spät wöchentlich'],['NNNN---','Nacht 4/3']].map(c=>'<button class="chip'+(f.cyc===c[0]?' on':'')+'" data-a="cyc" data-v="'+c[0]+'">'+c[1]+'</button>').join('')+'</div>'+
+      inp('cyc','text','Muster')+'<div class="tr"><span>Erster Tag</span>'+inp('start','date')+'</div>'+tr('Früh','fs','fe')+tr('Spät','ss','se')+tr('Nacht','ns','ne');
+  }else{
+    h+=inp('n','text','Name, zum Beispiel Uni')+tr('Zeit','s','e');
+    if(m==='series')h+='<div class="chips" style="margin:0">'+DN.map((x,i)=>'<button class="chip'+(S.addDays.indexOf(i)>-1?' on':'')+'" style="padding:8px 11px" data-a="tgl" data-v="'+i+'">'+x+'</button>').join('')+'</div><div class="tr"><span>Bis (optional)</span>'+inp('until','date')+'</div>';
+  }
+  return h+'<div class="tr"><button class="btn fill" data-a="save">Speichern</button><button class="btn" data-a="close">Abbrechen</button></div></div>';
+}
+function calView(){
+  const now=new Date(),t0=dayIdx(now),n=now.getHours()*60+now.getMinutes(),mon=addD(now,-t0+7*S.wk);
+  if(S.sel==null)S.sel=t0;
+  const dt=addD(mon,S.sel),isT=ds(dt)===ds(now),list=dayList(dt),me=S.me||{},s=eff(me),blk=blockOf(me);
+  const pct=m=>Math.max(0,Math.min(100,(m-360)/10.8));
+  const col=o=>o.c?SC[o.c]:COL[o.n.charCodeAt(0)%COL.length];
+  let v='<h1 class="logo">'+(isT?'Heute':DNL[S.sel])+'</h1><p class="sub">'+dt.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long'})+'</p>'+
+   '<div class="tr" style="justify-content:space-between"><button class="btn x" aria-label="Vorherige Woche" data-a="wk" data-v="-1">‹</button><span class="note" style="margin:0;min-width:0">'+fmtD(mon)+' – '+fmtD(addD(mon,6))+'</span><button class="btn x" aria-label="Nächste Woche" data-a="wk" data-v="1">›</button></div>'+
+   '<div class="chips" style="flex-wrap:nowrap;gap:6px;margin:6px 0 14px">'+DN.map((x,i)=>{const d=addD(mon,i),sh=starts(d).filter(o=>o.c)[0];return'<button class="chip'+(S.sel===i?' on':'')+'" style="flex:1;padding:7px 0;text-align:center;line-height:1.2'+(ds(d)===ds(now)&&S.sel!==i?';border-color:var(--ink)':'')+'" data-a="day" data-v="'+i+'">'+x+'<br><small>'+d.getDate()+(sh?' '+sh.c:'')+'</small></button>'}).join('')+'</div>';
+  if(isT)v+='<p class="status" style="text-align:left;margin:0"><span class="sd '+s+'"></span>'+(s==='free'?'Du bist verfügbar':me.status==='busy'?'Du bist als beschäftigt gemeldet':blk?'Beschäftigt bis '+hm(blk.e):'Eventuell verfügbar, noch nicht gemeldet')+'</p>';
+  v+='<div class="tl">'+list.map(l=>'<i style="left:'+pct(l.from)+'%;width:'+(pct(l.to)-pct(l.from))+'%;background:'+col(l.o)+'"></i>').join('')+(isT&&n>=360?'<u style="left:'+pct(n)+'%"></u>':'')+'</div><div class="ticks"><span>6 Uhr</span><span>12 Uhr</span><span>18 Uhr</span><span>24 Uhr</span></div>';
+  v+=list.length?list.map(l=>{
+    const o=l.o,key=o.x.id+'|'+o.k;
+    return'<div class="ev" style="border-left-color:'+col(o)+'"><span class="t">'+l.ts+'–'+l.te+'</span><span style="flex:1"><b>'+esc(o.n)+'</b><br><small style="color:var(--mute)">'+(o.x.kind==='event'?'Event':o.x.kind==='once'?'Einmalig':o.x.kind==='shift'?'Schichtplan':'Serie')+'</small></span>'+(o.x.kind==='event'?'':'<button class="btn x" aria-label="Löschen" data-a="del" data-v="'+key+'">×</button>')+'</div>'+
+    (S.del===key?'<p class="note" style="margin:8px 0 0">Nur diesen Termin oder die ganze Serie löschen?</p><div class="chips"><button class="chip" data-a="skip" data-v="'+key+'">Nur diesen</button><button class="chip" data-a="delS" data-v="'+o.x.id+'">Ganze Serie</button><button class="chip" data-a="delc">Abbrechen</button></div>':'');
+  }).join(''):'<p class="note">An diesem Tag ist nichts eingetragen. Du bist den ganzen Tag eventuell verfügbar.</p>';
+  if(S.adding)v+=formView();
+  else v+='<button class="btn fill" style="margin-top:16px" data-a="open" data-v="once|">+ Termin hinzufügen</button><p class="lbl">Schnell hinzufügen</p><div class="chips"><button class="chip" data-a="open" data-v="series|Arbeit">Arbeit</button><button class="chip" data-a="open" data-v="shift|">Schichtplan</button><button class="chip" data-a="open" data-v="series|Sport">Sport</button><button class="chip" data-a="open" data-v="series|Schlafen">Schlafen</button></div>';
+  const sr=S.series.filter(x=>x.kind!=='once');
+  if(sr.length)v+='<h2>Meine Serien</h2>'+sr.map(x=>'<div class="row"><span style="flex:1"><b>'+esc(x.n)+'</b><br><small style="color:var(--mute)">'+rule(x)+'</small></span><button class="btn x" aria-label="Serie löschen" data-a="delS" data-v="'+x.id+'">×</button></div>').join('');
+  return v+'<p class="note">Deine Homies sehen nur Zeitblöcke als „beschäftigt“, nie Namen oder Details deiner Termine.</p>';
+}
+
+/* Aktivitäten */
+const allActs=()=>ACTI.concat(S.customs.map(c=>[c.l,c.i]));
+const curAct=()=>allActs()[S.act]||ACTI[0];
+const savePrefs=()=>setDoc(doc(db,'users',S.user.uid,'private','prefs'),{acts:S.customs,meets:S.meets,ans:S.ans,showExp:S.showExp,cats:S.cats});
+function actChips(){
+  let h='<div class="chips">'+allActs().map((x,i)=>'<button class="chip'+(i===S.act?' on':'')+'" data-a="act" data-v="'+i+'">'+x[1]+' '+esc(x[0])+'</button>').join('')+'<button class="chip" data-a="actnew">+ Eigene</button></div>';
+  if(S.addingAct)h+='<div class="f"><input data-k="newActL" maxlength="20" placeholder="Name, zum Beispiel Bouldern" value="'+esc(S.newActL)+'"><div class="chips" style="margin:0">'+EMO.map(e=>'<button class="chip'+(S.newActI===e?' on':'')+'" aria-label="Bild wählen" data-a="actemo" data-v="'+e+'">'+e+'</button>').join('')+'</div><button class="btn fill" data-a="actsave">Aktivität speichern</button></div>';
+  if(S.act>=ACTI.length)h+='<button class="btn x" style="font-size:14px;padding:6px 0" data-a="actdel">Diese Aktivität löschen</button>';
+  return h;
+}
+async function saveAct(){
+  const l=S.newActL.trim();
+  if(!l){toast('Bitte einen Namen eingeben');return}
+  if(S.customs.length>=10){toast('Mehr als 10 eigene Aktivitäten gehen nicht');return}
+  S.customs.push({l:l,i:S.newActI});S.act=ACTI.length+S.customs.length-1;S.newActL='';S.addingAct=false;render();
+  await savePrefs();
+}
+async function delAct(){
+  const k=S.act-ACTI.length;if(k<0)return;
+  S.customs.splice(k,1);S.act=0;render();
+  await savePrefs();
+}
+async function resetPw(){
+  const em=S.em.trim();
+  if(!em){toast('Bitte zuerst deine E-Mail eintragen');return}
+  try{await sendPasswordResetEmail(auth,em)}catch(e){if(e.code==='auth/invalid-email'){toast('Bitte eine gültige E-Mail eingeben');return}console.warn(e)}
+  toast('Falls es ein Konto gibt, ist eine E-Mail unterwegs');
+}
+
+/* Darstellung */
+function applyTheme(){
+  const r=document.documentElement;
+  if(S.theme==='light'||S.theme==='dark')r.setAttribute('data-theme',S.theme);else r.removeAttribute('data-theme');
+  const m=document.querySelector('meta[name="theme-color"]');
+  if(m)m.content=(S.theme==='dark'||(S.theme!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches))?'#18191A':'#0866FF';
+}
+function setTheme(v){S.theme=v;try{localStorage.setItem('bro-theme',v)}catch(e){}applyTheme();render()}
+const themeChips=()=>'<div class="chips">'+[['auto','Automatisch'],['light','Hell'],['dark','Dunkel']].map(t=>'<button class="chip'+(S.theme===t[0]?' on':'')+'" data-a="theme" data-v="'+t[0]+'">'+t[1]+'</button>').join('')+'</div>';
+try{S.theme=localStorage.getItem('bro-theme')||'auto'}catch(e){S.theme='auto'}
+applyTheme();
+
+/* Einstellungen */
+const GEAR='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+function openSettings(){S.setName=S.me?S.me.name:'';S.pwCur='';S.pwNew='';S.emNew='';S.pwDel='';S.delOpen=false;S.tab='settings';render()}
+function stopListeners(){unsubs.forEach(f=>f());Object.keys(fl).forEach(k=>fl[k]());unsubs=[];fl={};stopEv()}
+const errMsg=e=>AE[e.code]||e.message||'Das hat nicht geklappt.';
+async function reauth(pw){
+  if(!pw)throw{message:'Bitte dein aktuelles Passwort eingeben.'};
+  const u=auth.currentUser;
+  try{await reauthenticateWithCredential(u,EmailAuthProvider.credential(u.email,pw))}
+  catch(e){if(e.code==='auth/invalid-credential'||e.code==='auth/wrong-password')throw{message:'Das aktuelle Passwort stimmt nicht.'};throw e}
+  return u;
+}
+async function saveName(){
+  const n=S.setName.trim();
+  if(!n){toast('Bitte einen Namen eingeben');return}
+  if(n.length>30){toast('Der Name darf höchstens 30 Zeichen haben');return}
+  await updateDoc(doc(db,'users',S.user.uid),{name:n});
+  try{await updateDoc(doc(db,'codes',S.me.code),{name:n})}catch(e){console.warn(e)}
+  toast('Name gespeichert');
+}
+async function changePw(){
+  try{
+    if(S.pwNew.length<6){toast('Das neue Passwort braucht mindestens 6 Zeichen');return}
+    const u=await reauth(S.pwCur);
+    await updatePassword(u,S.pwNew);
+    S.pwCur='';S.pwNew='';render();toast('Passwort geändert');
+  }catch(e){toast(errMsg(e))}
+}
+async function changeEmail(){
+  try{
+    const em=S.emNew.trim();
+    if(!em){toast('Bitte die neue E-Mail eingeben');return}
+    const u=await reauth(S.pwCur);
+    await verifyBeforeUpdateEmail(u,em);
+    S.emNew='';S.pwCur='';render();toast('Bestätigung an '+em+' gesendet. Die neue Adresse gilt erst nach dem Klick auf den Link.');
+  }catch(e){toast(errMsg(e))}
+}
+async function deleteAccount(){
+  let stopped=false;
+  try{
+    const u=await reauth(S.pwDel),uid=u.uid;
+    if(!confirm('Konto wirklich endgültig löschen? Das lässt sich nicht rückgängig machen.'))return;
+    stopListeners();stopped=true;
+    const friends=Object.keys(S.pairs),pairs=Object.values(S.pairs),reps=S.replies.map(r=>r.id),code=S.me.code;
+    for(const id of friends){try{await deleteDoc(doc(db,'users',id,'replies',uid))}catch(e){console.warn(e)}try{await deleteDoc(doc(db,'users',uid,'pings',id))}catch(e){console.warn(e)}}
+    for(const c of S.chats){try{const sn=await getDocs(collection(db,'chats',c.id,'messages'));for(const d of sn.docs)if(d.data().from===uid)await deleteDoc(doc(db,'chats',c.id,'messages',d.id));await deleteDoc(doc(db,'chats',c.id))}catch(e){console.warn(e)}}
+    for(const r of S.reqIn.concat(S.reqOut)){try{await deleteDoc(doc(db,'friendRequests',r.id))}catch(e){console.warn(e)}}
+    for(const pid of pairs)await deleteDoc(doc(db,'friendships',pid));
+    for(const id of reps)await deleteDoc(doc(db,'users',uid,'replies',id));
+    for(const e of S.events){
+      if(e.hostId===uid){for(const k of Object.keys(S.votes[e.id]||{}))await deleteDoc(doc(db,'events',e.id,'votes',k));await deleteDoc(doc(db,'events',e.id))}
+      else await deleteDoc(doc(db,'events',e.id,'votes',uid));
+    }
+    await deleteDoc(doc(db,'users',uid,'private','calendar'));
+    await deleteDoc(doc(db,'users',uid,'private','prefs'));
+    await deleteDoc(doc(db,'codes',code));
+    await deleteDoc(doc(db,'users',uid));
+    await deleteUser(u);
+    toast('Dein Konto wurde gelöscht');
+  }catch(e){
+    console.error(e);toast(errMsg(e));
+    if(stopped&&auth.currentUser)listen(auth.currentUser);
+  }
+}
+function settingsView(){
+  const inp=(k,t,ph,ac)=>'<input data-k="'+k+'" type="'+t+'" placeholder="'+ph+'" value="'+esc(S[k])+'" autocomplete="'+ac+'">';
+  let h='<button class="btn x" style="padding:0;font-size:15px;margin-bottom:10px" data-a="sback">‹ Zurück</button><h1 class="logo">Einstellungen</h1><p class="sub">'+esc(S.user.email)+'</p>';
+  h+='<h2>Profil</h2><div class="f">'+inp('setName','text','Dein Name','nickname')+'<button class="btn fill" data-a="savename">Namen speichern</button></div>';
+  h+=photoSection();h+=catSection();h+='<h2>Sicherheit</h2><p class="note" style="margin-top:0">Dafür brauchst du dein aktuelles Passwort.</p><div class="f">'+inp('pwCur','password','Aktuelles Passwort','current-password')+inp('pwNew','password','Neues Passwort (mindestens 6 Zeichen)','new-password')+'<button class="btn fill" data-a="chpw">Passwort ändern</button>'+inp('emNew','email','Neue E-Mail-Adresse','email')+'<button class="btn" data-a="chem">E-Mail ändern</button></div>';
+  h+='<h2>Anfragen</h2><p class="note" style="margin-top:0">Abgelaufene Anfragen deiner Homies aus den letzten 24 Stunden auf der Startseite anzeigen.</p><div class="chips"><button class="chip'+(S.showExp?' on':'')+'" data-a="shexp" data-v="1">Ja</button><button class="chip'+(!S.showExp?' on':'')+'" data-a="shexp" data-v="0">Nein</button></div>';
+  h+='<h2>Darstellung</h2>'+themeChips();
+  h+='<h2>Benachrichtigungen</h2><p class="note" style="margin-top:0">Push-Nachrichten kommen mit einem späteren Update. Bis dahin siehst du Anfragen, solange die App offen ist.</p>';
+  h+='<h2>Datenschutz</h2><p class="note" style="margin-top:0">Deine Homies sehen deinen Namen, deinen Status und Zeitblöcke, in denen du beschäftigt bist. Namen und Details deiner Termine sieht nur du.</p>';
+  h+='<h2>Konto</h2><button class="btn" data-a="out">Abmelden</button>';
+  h+=S.delOpen?'<div class="f"><p class="note" style="color:var(--busy);margin:0">Dein Profil, dein Code, alle Verbindungen und dein Kalender werden endgültig gelöscht.</p>'+inp('pwDel','password','Passwort zur Bestätigung','current-password')+'<button class="btn" style="border-color:var(--busy);color:var(--busy)" data-a="delnow">Endgültig löschen</button><button class="btn x" style="font-size:15px" data-a="delopen">Abbrechen</button></div>':'<div><button class="btn x" style="font-size:15px;color:var(--busy);padding:14px 0 0" data-a="delopen">Konto löschen …</button></div>';
+  return h+'<p class="note">Bro, Testversion</p>';
+}
+
+/* Später zusagen und Verabredungen */
+let seenAcc=new Set(),repliesReady=false;
+function dayLabel(t){
+  const d=new Date(t),n=new Date(),k=ds(d);
+  const lab=k===ds(n)?'heute':k===ds(addD(n,1))?'morgen':d.toLocaleDateString('de-DE',{weekday:'short',day:'numeric',month:'numeric'});
+  return lab+' '+hm(t);
+}
+function onReplies(snap,u){
+  S.replies=snap.docs.map(d=>Object.assign({id:d.id},d.data()));
+  S.replies.forEach(r=>{
+    const key=(r.kind||'r')+'|'+r.id+'|'+(r.later||r.t||'');
+    if(seenAcc.has(key))return;
+    seenAcc.add(key);
+    if(repliesReady){
+      if(r.kind==='acc')toast(r.name+' sagt zu: '+dayLabel(r.t));
+      else if(r.kind==='dec')toast(r.name+' kann leider nicht: '+dayLabel(r.t));
+      else if(r.later)toast(r.name+' schlägt '+dayLabel(r.later)+' vor');
+    }
+    if(r.kind==='dec'&&repliesReady)deleteDoc(doc(db,'users',u.uid,'replies',r.id)).catch(()=>{});
+  });
+  repliesReady=true;render();
+}
+function openLater(){
+  const d=new Date(Date.now()+2*3600000);
+  d.setMinutes(Math.ceil(d.getMinutes()/15)*15,0,0);
+  if(d.getDate()!==new Date().getDate()){S.lDay='tomorrow';S.lTime='18:00'}
+  else{S.lDay='today';S.lTime=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+  S.laterOpen=true;render();
+}
+function laterHtml(){
+  const b=S.banner;
+  return '<b>'+esc(b.name)+' hat Zeit</b><div>Wann passt es dir?</div><div class="chips" style="margin:8px 0"><button class="chip'+(S.lDay==='today'?' on':'')+'" data-a="lday" data-v="today">Heute später</button><button class="chip'+(S.lDay==='tomorrow'?' on':'')+'" data-a="lday" data-v="tomorrow">Morgen</button></div><div class="tr"><input data-k="lTime" type="time" aria-label="Uhrzeit" value="'+esc(S.lTime)+'"></div><button class="btn fill" data-a="lsend">Vorschlag senden</button><button class="btn" data-a="lback">Zurück</button>';
+}
+async function sendLater(){
+  const b=S.banner;if(!b)return;
+  if(!S.lTime){toast('Bitte eine Uhrzeit wählen');return}
+  const p=S.lTime.split(':'),d=new Date();
+  if(S.lDay==='tomorrow')d.setDate(d.getDate()+1);
+  d.setHours(+p[0],+p[1],0,0);
+  const t=d.getTime();
+  if(t<=Date.now()){toast('Bitte eine Uhrzeit in der Zukunft wählen');return}
+  S.banner=null;S.laterOpen=false;render();
+  await setDoc(doc(db,'users',b.id,'replies',S.user.uid),{ok:false,later:t,name:S.me.name,since:b.since,at:Date.now()});
+  noteAns(b,'later');toast('Vorschlag an '+b.name+' gesendet: '+dayLabel(t));
+}
+async function propOk(id){
+  const r=S.replies.filter(x=>x.id===id)[0];
+  if(!r||!r.later)return;
+  await setDoc(doc(db,'users',id,'replies','acc_'+S.user.uid),{kind:'acc',name:S.me.name,t:r.later,at:Date.now()});
+  await deleteDoc(doc(db,'users',S.user.uid,'replies',id));
+  S.meets=S.meets.filter(m=>!(m.n===r.name&&m.t===r.later)).concat([{n:r.name,t:r.later}]).slice(-20);
+  await savePrefs();
+  toast('Zugesagt: '+r.name+', '+dayLabel(r.later));
+}
+async function propNo(id){
+  const r=S.replies.filter(x=>x.id===id)[0];
+  if(!r||!r.later)return;
+  await setDoc(doc(db,'users',id,'replies','acc_'+S.user.uid),{kind:'dec',name:S.me.name,t:r.later,at:Date.now()});
+  await deleteDoc(doc(db,'users',S.user.uid,'replies',id));
+  toast('Vorschlag abgelehnt');
+}
+function planView(){
+  const now=Date.now();let h='';
+  const props=S.replies.filter(r=>r.later&&r.later>now);
+  if(props.length)h+='<h2>Vorschläge</h2>'+props.map(r=>'<div class="row">'+av(r.name,'maybe',(S.fr[r.id]||{}).photo)+'<span style="flex:1"><b>'+esc(r.name)+'</b><br><small style="color:var(--mute)">schlägt '+dayLabel(r.later)+' vor</small></span><button class="chip on" data-a="pok" data-v="'+r.id+'">Passt</button><button class="chip" data-a="pno" data-v="'+r.id+'">Nein</button></div>').join('');
+  const all=S.meets.filter(m=>m.t>now-7200000).map(m=>({n:m.n,t:m.t})).concat(S.replies.filter(r=>r.kind==='acc'&&r.t>now-7200000).map(r=>({n:r.name,t:r.t}))).sort((a,b)=>a.t-b.t);
+  if(all.length)h+='<h2>Verabredungen</h2>'+all.map(m=>'<div class="row">'+av(m.n,'free')+'<b>'+esc(m.n)+'</b><span class="m">'+dayLabel(m.t)+'</span></div>').join('');
+  return h;
+}
+
+/* Animationen zur Aktivität */
+const MOT={'⚽':'fly','🏋️':'fly','🚶':'fly','🎲':'fly','☕':'wob','🍕':'wob','🍻':'wob','🛋️':'wob','📚':'wob','🎮':'pul','🎬':'pul','🎵':'pul'};
+function playFx(icon){
+  if(!icon||icon==='🙂')return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const f=document.getElementById('fx');if(!f)return;
+  const e=document.createElement('span');
+  e.className='fxi fx-'+(MOT[icon]||'pul');e.textContent=icon;
+  f.appendChild(e);setTimeout(()=>e.remove(),1900);
+}
+
+/* Anfragen, Events und Abstimmungen */
+let evl={},evPrev={},evReady=false;
+const EMO2=['🎉','🍖','⚽','🎬','🍻','🎮','🎲','🚶','☕','🍕','🎵','📚'];
+const ago=ms=>{const m=Math.max(1,Math.round((Date.now()-ms)/60000));return m<60?'vor '+m+' Min':'vor '+Math.round(m/60)+' Std'};
+const ansTxt=a=>({yes:'Bin dabei',no:'Heute nicht',later:'Später vorgeschlagen'}[a]||'');
+function stopEv(){Object.keys(evl).forEach(k=>evl[k]());evl={};evPrev={};evReady=false;if(chatUnsub){chatUnsub();chatUnsub=null}chatsReady=false;reqReady=false}
+function noteAns(b,a){
+  S.ans[b.id+'|'+b.since]={a:a,t:Date.now()};
+  const ks=Object.keys(S.ans);
+  if(ks.length>60)ks.sort((x,y)=>S.ans[x].t-S.ans[y].t).slice(0,ks.length-60).forEach(k=>delete S.ans[k]);
+  savePrefs().catch(()=>{});
+}
+function reqList(expired){
+  const now=Date.now();
+  return Object.keys(S.pairs).map(id=>({id:id,f:S.fr[id]})).filter(x=>x.f&&x.f.freeSince&&now-x.f.freeSince<864e5&&((eff(x.f)==='free')!==expired)).sort((a,b)=>b.f.freeSince-a.f.freeSince);
+}
+function bannerFrom(id){const f=S.fr[id];return{id:id,name:f.name,act:actOf(f),icon:f.actIcon||'',until:f.freeUntil,since:f.freeSince}}
+function reqActive(){
+  const l=reqList(false);
+  if(!l.length)return'';
+  return'<h2>Gerade verfügbar</h2>'+l.map(x=>{
+    const f=x.f,a=actOf(f),an=S.ans[x.id+'|'+f.freeSince];
+    return'<div style="border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start">'+av(f.name,'free',f.photo)+'<span style="flex:1"><b>'+esc(f.name)+'</b><br><small style="color:var(--mute)">'+(f.freeUntil?'bis '+hm(f.freeUntil):'offen')+(a?', '+(f.actIcon||'')+' '+esc(a):'')+'</small>'+
+      (an?'<br><small style="color:var(--mute)">Du: '+ansTxt(an.a)+'</small>':'<div class="chips"><button class="chip on" data-a="rqy" data-v="'+x.id+'">Bin dabei</button><button class="chip" data-a="rql" data-v="'+x.id+'">Später …</button><button class="chip" data-a="rqn" data-v="'+x.id+'">Heute nicht</button></div>')+'</span></div>';
+  }).join('');
+}
+function reqExpired(){
+  if(!S.showExp)return'';
+  const l=reqList(true);
+  if(!l.length)return'';
+  return'<h2>Abgelaufene Anfragen</h2>'+l.map(x=>{
+    const f=x.f,a=actOf(f),an=S.ans[x.id+'|'+f.freeSince];
+    return'<div class="row">'+av(f.name,'off',f.photo)+'<span style="flex:1"><b style="color:var(--mute)">'+esc(f.name)+'</b><br><small style="color:var(--mute)">'+ago(f.freeSince)+(a?', '+(f.actIcon||'')+' '+esc(a):'')+(an?', du: '+ansTxt(an.a):'')+'</small></span><span class="m">abgelaufen</span></div>';
+  }).join('');
+}
+function onEvents(snap,u){
+  const prev=evPrev;evPrev={};
+  S.events=snap.docs.map(d=>Object.assign({id:d.id},d.data()));
+  const ids=S.events.map(e=>e.id);
+  S.events.forEach(e=>{
+    evPrev[e.id]=e.status;
+    if(!evl[e.id])evl[e.id]=onSnapshot(collection(db,'events',e.id,'votes'),vs=>{const m={};vs.docs.forEach(d=>{m[d.id]=d.data()});S.votes[e.id]=m;syncBusy();render()},er=>console.warn(er));
+    if(evReady){
+      if(!(e.id in prev)&&e.hostId!==u.uid)toast(e.hostName+' lädt dich ein: '+e.title);
+      else if(prev[e.id]==='open'&&e.status==='fixed')toast('Termin steht fest: '+e.title);
+    }
+  });
+  Object.keys(evl).forEach(id=>{if(ids.indexOf(id)<0){evl[id]();delete evl[id];delete S.votes[id]}});
+  evReady=true;syncBusy();render();
+}
+function evGoing(){
+  const out=[];
+  if(!S.user)return out;
+  S.events.forEach(e=>{
+    if(e.status!=='fixed'||e.fixed<0||!e.slots[e.fixed])return;
+    const mine=(S.votes[e.id]||{})[S.user.uid];
+    if(e.hostId===S.user.uid||(mine&&mine.v&&mine.v[e.fixed]==='yes'))out.push({id:e.id,n:e.title,t:e.slots[e.fixed].t,d:e.slots[e.fixed].d});
+  });
+  return out;
+}
+function starts(d){
+  const r=startsBase(d),k=ds(d);
+  evGoing().forEach(e=>{if(ds(new Date(e.t))===k)r.push({x:{id:'ev_'+e.id,kind:'event'},n:e.n,c:'',s:hm(e.t),e:hm(e.t+e.d*60000),k:k})});
+  return r;
+}
+function evForm(){
+  const f=S.evf;
+  const inp=(k,t,ph,v)=>'<input data-k="ev.'+k+'" type="'+t+'" placeholder="'+ph+'" value="'+esc(v)+'">';
+  let h='<div class="f">'+inp('title','text','Titel, zum Beispiel Grillen am See',f.title);
+  h+='<div class="chips" style="margin:0">'+EMO2.map(e=>'<button class="chip'+(f.icon===e?' on':'')+'" aria-label="Bild wählen" data-a="evicon" data-v="'+e+'">'+e+'</button>').join('')+'</div>';
+  h+='<p class="note" style="margin:0">Terminvorschläge, bis zu 3</p>';
+  f.slots.forEach((s,i)=>{h+='<div class="tr">'+inp('slots.'+i+'.d','date','',s.d)+inp('slots.'+i+'.t','time','',s.t)+(f.slots.length>1?'<button class="btn x" aria-label="Termin entfernen" data-a="evsdel" data-v="'+i+'">×</button>':'')+'</div>'});
+  if(f.slots.length<3)h+='<button class="btn" data-a="evsadd">+ Weiterer Termin</button>';
+  h+='<p class="note" style="margin:0">Dauer</p><div class="chips" style="margin:0">'+[[60,'1 Std'],[120,'2 Std'],[180,'3 Std'],[240,'4 Std']].map(d=>'<button class="chip'+(f.dur===d[0]?' on':'')+'" data-a="evdur" data-v="'+d[0]+'">'+d[1]+'</button>').join('')+'</div>';
+  const ids=Object.keys(S.pairs);
+  h+='<p class="note" style="margin:0">Wen willst du einladen?</p>'+(ids.length?'<div class="chips" style="margin:0">'+ids.map(id=>'<button class="chip'+(f.inv.indexOf(id)>-1?' on':'')+'" data-a="evinv" data-v="'+id+'">'+esc((S.fr[id]||{name:'…'}).name)+'</button>').join('')+'</div>':'<p class="note" style="margin:0">Du hast noch keine Homies.</p>');
+  return h+'<div class="tr"><button class="btn fill" data-a="evsave">Event erstellen</button><button class="btn" data-a="evcancel">Abbrechen</button></div></div>';
+}
+function evCard(e){
+  const me=S.user.uid,host=e.hostId===me,vs=S.votes[e.id]||{},fixed=e.status==='fixed';
+  let h='<div style="border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:28px">'+esc(e.icon||'🎉')+'</span><span style="flex:1"><b>'+esc(e.title)+'</b><br><small style="color:var(--mute)">von '+(host?'dir':esc(e.hostName))+', '+(fixed?'Termin steht fest':'Abstimmung läuft')+'</small></span></div>';
+  e.slots.forEach((s,i)=>{
+    if(fixed&&e.fixed!==i)return;
+    const c={yes:0,maybe:0,no:0},names=[];
+    Object.keys(vs).forEach(u=>{const v=vs[u].v&&vs[u].v[i];if(c[v]!=null)c[v]++;if(v==='yes')names.push(vs[u].name)});
+    const my=vs[me]&&vs[me].v?vs[me].v[i]:'';
+    h+='<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)"><b>'+dayLabel(s.t)+'</b> <small style="color:var(--mute)">('+(s.d/60)+' Std)</small><br><small style="color:var(--mute)">Ja '+c.yes+', Vielleicht '+c.maybe+', Nein '+c.no+(names.length?'. Dabei: '+names.map(esc).join(', '):'')+'</small>';
+    h+='<div class="chips">'+[['yes','Ja'],['maybe','Vielleicht'],['no','Nein']].map(o=>'<button class="chip'+(my===o[0]?' on':'')+'" data-a="vote" data-v="'+e.id+'|'+i+'|'+o[0]+'">'+o[1]+'</button>').join('')+'</div>';
+    if(host&&!fixed)h+='<button class="btn" style="margin-top:8px" data-a="evfix" data-v="'+e.id+'|'+i+'">Diesen Termin festlegen</button>';
+    h+='</div>';
+  });
+  if(fixed){
+    const going=host||(vs[me]&&vs[me].v&&vs[me].v[e.fixed]==='yes');
+    h+='<p class="note" style="margin:10px 0 0">'+(going?'Steht in deinem Kalender.':'Sag oben „Ja“, dann steht es in deinem Kalender.')+'</p>';
+    if(host)h+='<button class="btn x" style="font-size:14px;padding:6px 0" data-a="evopen" data-v="'+e.id+'">Abstimmung wieder öffnen</button>';
+  }
+  if(host)h+='<button class="btn x" style="font-size:14px;color:var(--busy);padding:6px 0" data-a="evdel" data-v="'+e.id+'">Event löschen</button>';
+  return h+'</div>';
+}
+function evView(){
+  const now=Date.now();
+  let h='<div class="tr" style="justify-content:space-between"><h1 class="logo">Events</h1><button class="btn fill" data-a="evnew">+ Neu</button></div><p class="sub">Termine abstimmen und im Kalender eintragen.</p>';
+  if(S.evAdding)h+=evForm();
+  const key=e=>e.status==='fixed'&&e.slots[e.fixed]?e.slots[e.fixed].t:e.slots[0].t;
+  const list=S.events.filter(e=>Math.max.apply(null,e.slots.map(s=>s.t))>now-864e5).sort((a,b)=>key(a)-key(b));
+  h+=list.length?list.map(evCard).join(''):(S.evAdding?'':'<p class="note">Noch keine Events. Lade deine Homies ein und lass sie über den Termin abstimmen.</p>');
+  return h;
+}
+function evNew(){S.evf={title:'',icon:'🎉',dur:120,slots:[{d:ds(addD(new Date(),1)),t:'19:00'}],inv:[]};S.evAdding=true;render()}
+async function evSave(){
+  const f=S.evf;
+  if(!f.title.trim()){toast('Bitte einen Titel eingeben');return}
+  if(!f.inv.length){toast('Bitte mindestens einen Homie einladen');return}
+  const slots=[];
+  for(const s of f.slots){
+    if(!s.d||!s.t){toast('Bitte Datum und Uhrzeit ausfüllen');return}
+    const p=s.d.split('-'),q=s.t.split(':'),t=new Date(+p[0],p[1]-1,+p[2],+q[0],+q[1]).getTime();
+    if(t<=Date.now()){toast('Ein Termin liegt in der Vergangenheit');return}
+    slots.push({t:t,d:f.dur});
+  }
+  const id='e'+Date.now(),uid=S.user.uid,v={};
+  await setDoc(doc(db,'events',id),{hostId:uid,hostName:S.me.name,title:f.title.trim(),icon:f.icon,slots:slots,members:[uid].concat(f.inv),status:'open',fixed:-1,createdAt:Date.now()});
+  slots.forEach((_,i)=>{v[i]='yes'});
+  await setDoc(doc(db,'events',id,'votes',uid),{name:S.me.name,v:v});
+  S.evAdding=false;render();toast('Event erstellt');
+}
+async function evVote(v){const p=v.split('|');await setDoc(doc(db,'events',p[0],'votes',S.user.uid),{name:S.me.name,v:{[p[1]]:p[2]}},{merge:true})}
+async function evFix(v){const p=v.split('|');await updateDoc(doc(db,'events',p[0]),{status:'fixed',fixed:+p[1]});toast('Termin festgelegt und im Kalender eingetragen')}
+async function evOpen(id){await updateDoc(doc(db,'events',id),{status:'open',fixed:-1})}
+async function evDel(id){
+  if(!confirm('Event wirklich löschen?'))return;
+  const vs=S.votes[id]||{};
+  for(const u of Object.keys(vs))await deleteDoc(doc(db,'events',id,'votes',u));
+  await deleteDoc(doc(db,'events',id));
+}
+
 /* Konto und Profil */
-const AE={'auth/invalid-credential':'E-Mail oder Passwort stimmt nicht.','auth/email-already-in-use':'Diese E-Mail ist schon registriert.','auth/weak-password':'Das Passwort braucht mindestens 6 Zeichen.','auth/invalid-email':'Bitte eine gültige E-Mail eingeben.','auth/network-request-failed':'Keine Verbindung. Bitte später nochmal versuchen.','auth/too-many-requests':'Zu viele Versuche. Bitte kurz warten.','auth/unauthorized-domain':'Diese Adresse ist in Firebase noch nicht freigegeben (Autorisierte Domains).'};
+const AE={'auth/invalid-credential':'E-Mail oder Passwort stimmt nicht.','auth/email-already-in-use':'Diese E-Mail ist schon registriert.','auth/weak-password':'Das Passwort braucht mindestens 6 Zeichen.','auth/invalid-email':'Bitte eine gültige E-Mail eingeben.','auth/network-request-failed':'Keine Verbindung. Bitte später nochmal versuchen.','auth/too-many-requests':'Zu viele Versuche. Bitte kurz warten.','auth/requires-recent-login':'Bitte melde dich neu an und versuche es noch einmal.','auth/unauthorized-domain':'Diese Adresse ist in Firebase noch nicht freigegeben (Autorisierte Domains).'};
 async function submit(){
   S.err='';S.busy=true;render();
   try{
@@ -122,31 +622,39 @@ async function ensureUser(u){
 }
 function listen(u){
   unsubs.push(onSnapshot(doc(db,'users',u.uid),s=>{S.me=s.data()||null;render()}));
-  unsubs.push(onSnapshot(collection(db,'users',u.uid,'replies'),s=>{S.replies=s.docs.map(d=>Object.assign({id:d.id},d.data()));render()}));
+  unsubs.push(onSnapshot(doc(db,'users',u.uid,'private','calendar'),s=>{const v=s.data();S.series=v&&v.series?v.series:[];S.ex=v&&v.ex?v.ex:{};S.calLoaded=true;syncBusy();render()},e=>console.warn(e)));
+  unsubs.push(onSnapshot(doc(db,'users',u.uid,'private','prefs'),s=>{const v=s.data();S.customs=v&&v.acts?v.acts:[];S.meets=v&&v.meets?v.meets:[];S.ans=v&&v.ans?v.ans:{};S.showExp=!!(v&&v.showExp);S.cats=v&&v.cats?v.cats:[];render()},e=>console.warn(e)));
+  unsubs.push(onSnapshot(query(collection(db,'events'),where('members','array-contains',u.uid)),s=>onEvents(s,u),e=>console.warn(e)));
+  unsubs.push(onSnapshot(query(collection(db,'friendRequests'),where('to','==',u.uid)),s=>onReq(s),e=>console.warn(e)));
+  unsubs.push(onSnapshot(query(collection(db,'friendRequests'),where('from','==',u.uid)),s=>{S.reqOut=s.docs.map(d=>Object.assign({id:d.id},d.data()));render()},e=>console.warn(e)));
+  unsubs.push(onSnapshot(query(collection(db,'chats'),where('members','array-contains',u.uid)),s=>onChats(s,u),e=>console.warn(e)));
+  unsubs.push(onSnapshot(collection(db,'users',u.uid,'replies'),s=>onReplies(s,u)));
   unsubs.push(onSnapshot(query(collection(db,'friendships'),where('members','array-contains',u.uid)),s=>{
     const ids=[];S.pairs={};
     s.docs.forEach(d=>{const o=d.data().members.find(m=>m!==u.uid);if(o){ids.push(o);S.pairs[o]=d.id}});
     ids.forEach(id=>{
       if(fl[id])return;
-      fl[id]=onSnapshot(doc(db,'users',id),d=>{
+      const pu=onSnapshot(doc(db,'users',id,'pings',u.uid),d=>{S.pings[id]=d.data()||null},e=>console.warn(e));
+      const fu=onSnapshot(doc(db,'users',id),d=>{
         const v=d.data();if(!v)return;
         const p=S.fr[id];S.fr[id]=v;
         if(p&&v.status==='free'&&v.freeSince!==p.freeSince&&eff(v)==='free'){
-          S.banner={id:id,name:v.name,act:v.act,until:v.freeUntil,since:v.freeSince};
-          if(navigator.vibrate)navigator.vibrate(200);
+          const go=()=>{if(v.aud&&!(S.pings[id]&&S.pings[id].since===v.freeSince))return;S.laterOpen=false;S.banner={id:id,name:v.name,act:actOf(v),icon:v.actIcon||'',until:v.freeUntil,since:v.freeSince};if(navigator.vibrate)navigator.vibrate(200);playFx(v.actIcon);render()};
+          if(v.aud)setTimeout(go,900);else go();
         }
         render();
       },e=>console.warn(e));
+      fl[id]=()=>{pu();fu()};
     });
-    Object.keys(fl).forEach(id=>{if(ids.indexOf(id)<0){fl[id]();delete fl[id];delete S.fr[id]}});
+    Object.keys(fl).forEach(id=>{if(ids.indexOf(id)<0){fl[id]();delete fl[id];delete S.fr[id];delete S.pings[id]}});
     render();
   }));
 }
 onAuthStateChanged(auth,async u=>{
-  unsubs.forEach(f=>f());Object.keys(fl).forEach(k=>fl[k]());unsubs=[];fl={};
-  Object.assign(S,{user:u,me:null,fr:{},pairs:{},replies:[],banner:null});
+  unsubs.forEach(f=>f());Object.keys(fl).forEach(k=>fl[k]());unsubs=[];fl={};stopEv();
+  Object.assign(S,{user:u,me:null,fr:{},pairs:{},replies:[],banner:null,series:[],ex:{},calLoaded:false,customs:[],meets:[],laterOpen:false,ans:{},showExp:false,events:[],votes:{},evAdding:false,reqIn:[],reqOut:[],chatWith:null,chats:[],msgs:[],cats:[],pings:{},showQr:false});lastBusy='';seenAcc=new Set();repliesReady=false;
   if(u){
-    try{await ensureUser(u);listen(u)}
+    try{await ensureUser(u);listen(u);if(S.pendingAdd){S.codeIn=S.pendingAdd.toUpperCase();S.pendingAdd='';S.tab='friends';toast('Code eingetragen. Tippe auf Anfrage senden.')}}
     catch(e){console.error(e);S.err='Die Datenbank ist nicht erreichbar. Sind Firestore und die Regeln eingerichtet?'}
   }
   S.ready=true;render();
@@ -157,42 +665,211 @@ async function setStatus(o){await updateDoc(doc(db,'users',S.user.uid),o)}
 async function press(){
   if(eff(S.me)==='free'){await setStatus({status:'maybe',freeUntil:0});return}
   const now=Date.now();
-  await setStatus({status:'free',freeUntil:S.dur?now+S.dur*60000:0,freeSince:now,act:S.act});
+  const aud=audienceFor(curAct()[0]==='Egal'?'':curAct()[0]);playFx(curAct()[1]);if(aud.filtered)await Promise.all(aud.ids.map(id=>setDoc(doc(db,'users',S.user.uid,'pings',id),{since:now,at:now})));await setStatus({status:'free',aud:aud.filtered,freeUntil:S.dur?now+S.dur*60000:0,freeSince:now,act:S.act,actLabel:curAct()[0]==='Egal'?'':curAct()[0],actIcon:curAct()[1]});
   toast(Object.keys(S.pairs).length?'Deine Homies sehen es jetzt':'Noch keine Homies, füge zuerst welche hinzu');
 }
-async function busy(){await setStatus({status:eff(S.me)==='busy'?'maybe':'busy',freeUntil:0})}
+async function busy(){await setStatus({status:S.me.status==='busy'?'maybe':'busy',freeUntil:0})}
 async function answer(ok){
-  const b=S.banner;S.banner=null;render();if(!b)return;
+  const b=S.banner;S.banner=null;S.laterOpen=false;render();if(!b)return;noteAns(b,ok?'yes':'no');
   await setDoc(doc(db,'users',b.id,'replies',S.user.uid),{ok:ok,name:S.me.name,since:b.since,at:Date.now()});
-  toast(ok?b.name+' weiß Bescheid: Du bist dabei':b.name+' weiß Bescheid: Heute nicht');
+  toast(ok?b.name+' weiß Bescheid: Du bist dabei':b.name+' weiß Bescheid: Heute nicht');if(ok)openChat(b.id);
 }
+async function rm(id){if(!confirm('Homie wirklich entfernen?'))return;await deleteDoc(doc(db,'friendships',S.pairs[id]))}
+async function copy(){try{await navigator.clipboard.writeText(S.me.code);toast('Code kopiert')}catch(e){toast('Code: '+S.me.code)}}
+const H={mode:()=>{S.mode=S.mode==='login'?'reg':'login';S.err='';render()},submit:submit,tab:v=>{S.tab=v;render()},dur:v=>{S.dur=+v;render()},act:v=>{S.act=+v;render()},press:press,busy:busy,add:addHomie,copy:copy,out:()=>signOut(auth),rm:rm,yes:()=>answer(true),no:()=>answer(false),reset:resetPw,theme:setTheme,settings:openSettings,sback:()=>{S.tab='home';render()},savename:saveName,chpw:changePw,chem:changeEmail,delopen:()=>{S.delOpen=!S.delOpen;render()},delnow:deleteAccount,later:openLater,lback:()=>{S.laterOpen=false;render()},lday:v=>{S.lDay=v;render()},lsend:sendLater,pok:propOk,pno:propNo,rqy:id=>{S.banner=bannerFrom(id);return answer(true)},rqn:id=>{S.banner=bannerFrom(id);return answer(false)},rql:id=>{S.banner=bannerFrom(id);openLater()},chat:id=>openChat(id),chatback:closeChat,quick:q=>sendMsg(q),send:()=>sendMsg(S.chatDraft),racc:acceptReq,rdec:rejectReq,rwd:withdrawReq,qr:()=>{S.showQr=!S.showQr;render()},share:shareInvite,photodel:async()=>{await updateDoc(doc(db,'users',S.user.uid),{photo:''})},catadd:catAdd,catdel:catDel,cattm:v=>catToggle(v,'m'),catta:v=>catToggle(v,'a'),shexp:v=>{S.showExp=v==='1';render();savePrefs().catch(()=>{})},
+  evnew:evNew,evcancel:()=>{S.evAdding=false;render()},evicon:v=>{S.evf.icon=v;render()},evdur:v=>{S.evf.dur=+v;render()},evsadd:()=>{if(S.evf.slots.length<3){S.evf.slots.push({d:ds(addD(new Date(),1)),t:'19:00'});render()}},evsdel:v=>{S.evf.slots.splice(+v,1);render()},evinv:v=>{const a=S.evf.inv,k=a.indexOf(v);if(k>-1)a.splice(k,1);else a.push(v);render()},evsave:evSave,vote:evVote,evfix:evFix,evopen:evOpen,evdel:evDel,actnew:()=>{S.addingAct=!S.addingAct;render()},actemo:v=>{S.newActI=v;render()},actsave:saveAct,actdel:delAct,wk:v=>{S.wk+=+v;render()},day:v=>{S.sel=+v;S.del=null;render()},fmode:v=>{S.fmode=v;render()},tgl:v=>{const a=S.addDays,k=a.indexOf(+v);if(k>-1)a.splice(k,1);else a.push(+v);render()},cyc:v=>{S.f.cyc=v;render()},open:v=>{const p=v.split('|');openForm(p[0],p[1])},close:()=>{S.adding=false;render()},save:saveEvent,del:delOcc,skip:skipOcc,delS:delSeries,delc:()=>{S.del=null;render()}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&H[b.dataset.a])Promise.resolve(H[b.dataset.a](b.dataset.v)).catch(err=>{console.error(err);toast('Das hat nicht geklappt. Bitte nochmal versuchen.')})});
+document.addEventListener('input',e=>{const k=e.target.dataset.k;if(!k)return;if(k.indexOf('f.')===0)S.f[k.slice(2)]=e.target.value;else if(k.indexOf('ev.')===0){const p=k.slice(3).split('.');let o=S.evf;for(let i=0;i<p.length-1;i++)o=o[p[i]];o[p[p.length-1]]=e.target.value}else S[k]=e.target.value});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const k=e.target.dataset&&e.target.dataset.k;if(k==='chatDraft')sendMsg(S.chatDraft);else if(k==='codeIn')H.add();else if(k==='newActL')saveAct();else if(k==='catName')H.catadd();else if(k&&k.indexOf('f.')<0&&!S.user)H.submit()});
+setInterval(()=>{if(S.user&&S.me&&!(document.activeElement&&document.activeElement.tagName==='INPUT'))render()},30000);
+
+/* Anfragen, Chat, Kategorien, Profilbild, QR */
+let chatUnsub=null,chatsReady=false,reqReady=false;
+const rank={free:0,maybe:1,busy:2};
+const pairOf=o=>[S.user.uid,o].sort().join('_');
+const NAVI={home:'<path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',friends:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',events:'<path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7-6.2-3.5-6.2 3.5 1.4-7L2 9.4l7-.9z"/>',cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',chats:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'};
+const navIcon=(k,z)=>'<svg width="'+(z||24)+'" height="'+(z||24)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+NAVI[k]+'</svg>';
+const unreadOf=c=>c.last&&c.last.from!==S.user.uid&&!((c.r||{})[S.user.uid]>=c.last.at);
+
+/* Homie-Anfragen */
+function onReq(s){
+  const prev=S.reqIn.map(r=>r.id);
+  S.reqIn=s.docs.map(d=>Object.assign({id:d.id},d.data()));
+  if(reqReady)S.reqIn.forEach(r=>{if(prev.indexOf(r.id)<0)toast(r.fromName+' möchte dein Homie sein')});
+  reqReady=true;render();
+}
+async function acceptReq(from){
+  const ids=[S.user.uid,from].sort();
+  await setDoc(doc(db,'friendships',ids.join('_')),{members:ids});
+  await deleteDoc(doc(db,'friendRequests',from+'_'+S.user.uid));
+  const r=S.reqIn.filter(x=>x.from===from)[0];
+  toast((r?r.fromName:'Dein Homie')+' ist jetzt dein Homie');
+}
+async function rejectReq(from){await deleteDoc(doc(db,'friendRequests',from+'_'+S.user.uid));toast('Anfrage abgelehnt')}
+async function withdrawReq(to){await deleteDoc(doc(db,'friendRequests',S.user.uid+'_'+to));toast('Anfrage zurückgezogen')}
 async function addHomie(){
   let code=S.codeIn.trim().toUpperCase();if(!code)return;
   if(code.indexOf('BRO-')!==0)code='BRO-'+code;
   const c=await getDoc(doc(db,'codes',code));
   if(!c.exists()){toast('Diesen Code gibt es nicht');return}
-  const o=c.data().uid;
-  if(o===S.user.uid){toast('Das ist dein eigener Code');return}
+  const o=c.data().uid,me=S.user.uid;
+  if(o===me){toast('Das ist dein eigener Code');return}
   if(S.pairs[o]){toast('Ihr seid schon verbunden');return}
-  const ids=[S.user.uid,o].sort();
-  await setDoc(doc(db,'friendships',ids.join('_')),{members:ids});
-  S.codeIn='';toast(c.data().name+' ist jetzt dein Homie');
+  if(S.reqIn.some(r=>r.from===o)){await acceptReq(o);S.codeIn='';return}
+  if(S.reqOut.some(r=>r.to===o)){toast('Die Anfrage an '+c.data().name+' läuft schon');return}
+  await setDoc(doc(db,'friendRequests',me+'_'+o),{from:me,to:o,fromName:S.me.name,toName:c.data().name,at:Date.now()});
+  S.codeIn='';render();toast('Anfrage an '+c.data().name+' gesendet');
 }
-async function rm(id){if(!confirm('Homie wirklich entfernen?'))return;await deleteDoc(doc(db,'friendships',S.pairs[id]))}
-async function copy(){try{await navigator.clipboard.writeText(S.me.code);toast('Code kopiert')}catch(e){toast('Code: '+S.me.code)}}
-const H={mode:()=>{S.mode=S.mode==='login'?'reg':'login';S.err='';render()},submit:submit,tab:v=>{S.tab=v;render()},dur:v=>{S.dur=+v;render()},act:v=>{S.act=+v;render()},press:press,busy:busy,add:addHomie,copy:copy,out:()=>signOut(auth),rm:rm,yes:()=>answer(true),no:()=>answer(false)};
-document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&H[b.dataset.a])Promise.resolve(H[b.dataset.a](b.dataset.v)).catch(err=>{console.error(err);toast('Das hat nicht geklappt. Bitte nochmal versuchen.')})});
-document.addEventListener('input',e=>{const k=e.target.dataset.k;if(k)S[k]=e.target.value});
-document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const k=e.target.dataset&&e.target.dataset.k;if(k==='codeIn')H.add();else if(k)H.submit()});
-setInterval(()=>{if(S.user&&S.me&&!(document.activeElement&&document.activeElement.tagName==='INPUT'))render()},30000);
+
+/* Kategorien und gezielte Anfragen */
+function audienceFor(label){
+  if(!S.cats.length)return{filtered:false,ids:[]};
+  const ids=Object.keys(S.pairs).filter(id=>{
+    const mine=S.cats.filter(c=>(c.m||[]).indexOf(id)>-1);
+    if(!mine.length)return true;
+    return mine.some(c=>!(c.a||[]).length||!label||c.a.indexOf(label)>-1);
+  });
+  return{filtered:true,ids:ids};
+}
+const splitKey=v=>{const i=v.indexOf('|');return[v.slice(0,i),v.slice(i+1)]};
+function catAdd(){
+  const n=S.catName.trim();
+  if(!n){toast('Bitte einen Namen eingeben');return}
+  S.cats.push({id:'c'+Date.now(),n:n.slice(0,24),m:[],a:[]});S.catName='';render();return savePrefs();
+}
+function catDel(id){S.cats=S.cats.filter(c=>c.id!==id);render();return savePrefs()}
+function catToggle(v,key){
+  const p=splitKey(v),c=S.cats.filter(x=>x.id===p[0])[0];if(!c)return;
+  const a=c[key]=c[key]||[],k=a.indexOf(p[1]);
+  if(k>-1)a.splice(k,1);else a.push(p[1]);
+  render();return savePrefs();
+}
+function catSection(){
+  const ids=Object.keys(S.pairs),acts=allActs().map(a=>a[0]).filter(l=>l!=='Egal');
+  let h='<h2>Kategorien</h2><p class="note" style="margin-top:0">Teile Homies in Gruppen ein und lege fest, bei welchen Aktivitäten sie von dir angepingt werden. Homies ohne Gruppe bekommen jede Anfrage.</p>';
+  h+=S.cats.map(c=>'<div style="border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:10px"><div class="tr" style="justify-content:space-between"><b>'+esc(c.n)+'</b><button class="btn x" style="font-size:14px;color:var(--busy)" data-a="catdel" data-v="'+c.id+'">Löschen</button></div><p class="note" style="margin:6px 0 0">Wer gehört dazu?</p><div class="chips">'+(ids.length?ids.map(id=>'<button class="chip'+((c.m||[]).indexOf(id)>-1?' on':'')+'" data-a="cattm" data-v="'+c.id+'|'+id+'">'+esc((S.fr[id]||{name:'…'}).name)+'</button>').join(''):'<span class="note">Noch keine Homies.</span>')+'</div><p class="note" style="margin:10px 0 0">Wobei anpingen? Nichts gewählt heißt bei allem.</p><div class="chips">'+acts.map(l=>'<button class="chip'+((c.a||[]).indexOf(l)>-1?' on':'')+'" data-a="catta" data-v="'+c.id+'|'+esc(l)+'">'+esc(l)+'</button>').join('')+'</div></div>').join('');
+  return h+'<div class="tr" style="margin-top:12px"><input data-k="catName" maxlength="24" placeholder="Neue Gruppe, zum Beispiel Sport" value="'+esc(S.catName)+'"><button class="btn fill" data-a="catadd">Hinzufügen</button></div>';
+}
+
+/* Profilbild */
+function readPhoto(file){
+  return new Promise((res,rej)=>{
+    const fr=new FileReader();
+    fr.onload=()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=c.height=160;const m=Math.min(img.width,img.height);c.getContext('2d').drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,160,160);res(c.toDataURL('image/jpeg',0.8))};img.onerror=rej;img.src=fr.result};
+    fr.onerror=rej;fr.readAsDataURL(file);
+  });
+}
+async function setPhoto(file){
+  if(!file)return;
+  try{const d=await readPhoto(file);await updateDoc(doc(db,'users',S.user.uid),{photo:d});toast('Profilbild gespeichert')}
+  catch(e){console.warn(e);toast('Das Bild konnte nicht gelesen werden')}
+}
+document.addEventListener('change',e=>{if(e.target.id==='photoIn')setPhoto(e.target.files[0])});
+function photoSection(){
+  const me=S.me;
+  return'<h2>Profilbild</h2><div class="tr" style="gap:14px">'+av(me.name,'free',me.photo,64)+'<label class="btn fill" for="photoIn" style="cursor:pointer">Bild wählen</label><input id="photoIn" type="file" accept="image/*" style="display:none">'+(me.photo?'<button class="btn x" style="font-size:14px" data-a="photodel">Entfernen</button>':'')+'</div>';
+}
+
+/* QR-Code und Einladungslink */
+const inviteLink=()=>location.origin+location.pathname+'?add='+S.me.code;
+function qrSvg(text){
+  try{if(!window.qrcode)return'';const q=window.qrcode(0,'M');q.addData(text);q.make();return q.createSvgTag({cellSize:5,margin:0,scalable:true})}
+  catch(e){console.warn(e);return''}
+}
+async function shareInvite(){
+  const l=inviteLink();
+  if(navigator.share){try{await navigator.share({title:'Bro',text:'Komm zu Bro! Mein Code: '+S.me.code,url:l});return}catch(e){}}
+  try{await navigator.clipboard.writeText(l);toast('Einladungslink kopiert')}catch(e){toast(l)}
+}
+
+/* Chat */
+function onChats(s,u){
+  const prev=S.chats;
+  S.chats=s.docs.map(d=>Object.assign({id:d.id},d.data()));
+  if(chatsReady)S.chats.forEach(c=>{
+    const o=c.members.find(m=>m!==u.uid),old=prev.filter(x=>x.id===c.id)[0];
+    if(c.last&&c.last.from!==u.uid&&(!old||!old.last||old.last.at!==c.last.at)&&S.chatWith!==o)toast((S.fr[o]?S.fr[o].name:'Neue Nachricht')+': '+c.last.text);
+  });
+  chatsReady=true;render();
+}
+function markRead(o){
+  const c=S.chats.filter(x=>x.id===pairOf(o))[0];
+  if(c&&unreadOf(c))setDoc(doc(db,'chats',c.id),{r:{[S.user.uid]:Date.now()}},{merge:true}).catch(()=>{});
+}
+function openChat(o){
+  if(!o)return;
+  if(chatUnsub){chatUnsub();chatUnsub=null}
+  S.chatWith=o;S.msgs=[];S.tab='chat';
+  chatUnsub=onSnapshot(collection(db,'chats',pairOf(o),'messages'),s=>{
+    S.msgs=s.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>a.at-b.at);
+    render();window.scrollTo(0,document.body.scrollHeight);markRead(o);
+  },e=>console.warn(e));
+  render();
+}
+function closeChat(){if(chatUnsub){chatUnsub();chatUnsub=null}S.chatWith=null;S.tab='chats';render()}
+async function sendMsg(t){
+  t=(t||'').trim();
+  if(!t||!S.chatWith)return;
+  const o=S.chatWith,pid=pairOf(o),me=S.user.uid,now=Date.now(),id='m'+now+Math.random().toString(36).slice(2,6);
+  S.chatDraft='';
+  await setDoc(doc(db,'chats',pid,'messages',id),{from:me,text:t.slice(0,500),at:now});
+  await setDoc(doc(db,'chats',pid),{members:[me,o].sort(),last:{text:t.slice(0,80),from:me,at:now},r:{[me]:now}},{merge:true});
+}
 
 /* Ansichten */
+const storyBtn=(label,name,s,ph,tab)=>'<button data-a="tab" data-v="'+tab+'" style="border:0;background:none;color:inherit;font:inherit;width:62px;flex:none;text-align:center;padding:0"><div style="display:flex;justify-content:center">'+av(name,s,ph,58)+'</div><div style="font-size:12px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(label)+'</div></button>';
+function homeView(me,s){
+  const free=s==='free',blk=blockOf(me),ids=Object.keys(S.pairs).sort((a,b)=>rank[eff(S.fr[a])]-rank[eff(S.fr[b])]);
+  const line=free?'Du bist verfügbar'+(me.freeUntil?' bis '+hm(me.freeUntil):''):s==='busy'?(me.status!=='busy'&&blk?'Beschäftigt bis '+hm(blk.e):'Du bist als beschäftigt gemeldet'):'Eventuell verfügbar, noch nicht gemeldet';
+  let h='<div class="tr" style="justify-content:space-between"><h1 class="logo">bro</h1><button class="btn x" style="padding:6px" aria-label="Einstellungen" data-a="settings">'+GEAR+'</button></div>';
+  h+='<div style="display:flex;gap:12px;overflow-x:auto;padding:8px 0 14px">'+storyBtn('Du',me.name,s,me.photo,'friends')+ids.map(id=>{const f=S.fr[id]||{name:'…'};return storyBtn(f.name,f.name,eff(f),f.photo,'friends')}).join('')+'</div>';
+  h+='<div style="background:var(--surface);border-radius:20px;padding:16px"><div class="tr" style="gap:16px"><button class="big sm'+(free?' on':'')+'" data-a="press">'+(free?'Du hast Zeit':s==='busy'?'Trotzdem Zeit':'Ich hab Zeit')+'</button><div><div style="font-weight:800;font-size:19px">'+(free?'Tippen zum Beenden':'Hast du Zeit?')+'</div><div style="color:var(--mute);font-size:14px;margin-top:4px"><span class="sd '+s+'"></span>'+line+'</div></div></div>';
+  if(!free)h+='<p class="lbl" style="margin-top:14px">Wie lange?</p>'+chips(DURS,S.dur,'dur')+'<p class="lbl">Worauf hast du Lust?</p>'+actChips();
+  h+='</div>';
+  h+=reqActive()+planView();
+  if(free){
+    const rs=S.replies.filter(r=>r.since===me.freeSince&&!r.later&&!r.kind);
+    h+='<h2>Wer ist dabei?</h2>'+(rs.length?rs.map(r=>'<div class="row"'+(r.ok?' style="cursor:pointer" data-a="chat" data-v="'+r.id+'"':'')+'>'+av(r.name,r.ok?'free':'busy',(S.fr[r.id]||{}).photo)+'<b>'+esc(r.name)+'</b><span class="m">'+(r.ok?'Bin dabei, Chat öffnen ›':'Heute nicht')+'</span></div>').join(''):'<p class="note">Warte auf Antworten …</p>');
+  }else h+=me.status==='busy'?'<button class="btn" style="margin-top:22px" data-a="busy">Doch nicht beschäftigt</button>':(blk?'':'<button class="btn" style="margin-top:22px" data-a="busy">Ich bin beschäftigt</button>');
+  return h+reqExpired();
+}
+function friendsView(me,s){
+  const ids=Object.keys(S.pairs).sort((a,b)=>rank[eff(S.fr[a])]-rank[eff(S.fr[b])]),n=ids.filter(id=>eff(S.fr[id])==='free').length;
+  let h='<h1 class="logo">Homies</h1><p class="sub">'+(ids.length?n+' von '+ids.length+' sind verfügbar.':'Noch keine Homies.')+'</p>';
+  if(S.reqIn.length)h+='<h2 style="margin-top:6px">Anfragen an dich</h2>'+S.reqIn.map(r=>'<div style="border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px"><b>'+esc(r.fromName)+'</b> möchte dein Homie sein.<div class="chips"><button class="chip on" data-a="racc" data-v="'+r.from+'">Annehmen</button><button class="chip" data-a="rdec" data-v="'+r.from+'">Ablehnen</button></div></div>').join('');
+  h+='<p class="lbl" style="margin:0">So sehen dich deine Homies</p><div class="row">'+av(me.name,s,me.photo)+'<b>'+esc(me.name)+'</b><span class="m">'+stText(me)+'</span></div><p class="lbl">Deine Homies</p>';
+  h+=ids.length?ids.map(id=>{const f=S.fr[id]||{name:'…'};return'<div class="row">'+av(f.name,eff(f),f.photo)+'<b>'+esc(f.name)+'</b><span class="m">'+(S.fr[id]?stText(f):'')+'</span><button class="btn x" aria-label="Chat öffnen" style="padding:4px 6px" data-a="chat" data-v="'+id+'">'+navIcon('chats',20)+'</button><button class="btn x" aria-label="Homie entfernen" data-a="rm" data-v="'+id+'">×</button></div>'}).join(''):'<p class="note" style="margin-top:6px">Zeig deinen QR-Code oder gib unten den Code eines Freundes ein.</p>';
+  if(S.reqOut.length)h+='<p class="lbl">Gesendete Anfragen</p>'+S.reqOut.map(r=>'<div class="row"><b>'+esc(r.toName)+'</b><span class="m">wartet auf Antwort</span><button class="btn x" style="font-size:14px" data-a="rwd" data-v="'+r.to+'">Zurückziehen</button></div>').join('');
+  h+='<h2>Homie hinzufügen</h2><div class="tr"><input data-k="codeIn" placeholder="Code, zum Beispiel BRO-AB12" value="'+esc(S.codeIn)+'" autocapitalize="characters"><button class="btn fill" data-a="add">Anfrage senden</button></div>';
+  h+='<h2>Dein Code</h2><div class="code">'+esc(me.code)+'</div><div class="tr" style="gap:8px"><button class="btn fill" data-a="copy">Code kopieren</button><button class="btn" data-a="qr">'+(S.showQr?'QR ausblenden':'QR-Code zeigen')+'</button></div>';
+  if(S.showQr){const svg=qrSvg(inviteLink());h+=svg?'<div class="qr">'+svg+'</div><p class="note" style="text-align:center">Dein Freund scannt ihn mit der Kamera-App.</p>':'<p class="note">Der QR-Code konnte nicht geladen werden. Teile den Link stattdessen.</p>';h+='<button class="btn" data-a="share">Einladungslink teilen</button>'}
+  return h+'<button class="btn" style="margin-top:26px" data-a="settings">Einstellungen</button>';
+}
+function chatsView(){
+  const me=S.user.uid,info=id=>S.chats.filter(c=>c.id===pairOf(id))[0],lastAt=id=>{const c=info(id);return c&&c.last?c.last.at:0};
+  const ids=Object.keys(S.pairs).sort((a,b)=>(lastAt(b)-lastAt(a))||((S.fr[a]||{name:''}).name.localeCompare((S.fr[b]||{name:''}).name)));
+  let h='<h1 class="logo">Chats</h1><p class="sub">Sprich dich kurz mit deinen Homies ab.</p>';
+  if(!ids.length)return h+'<p class="note">Noch keine Homies.</p>';
+  return h+ids.map(id=>{
+    const f=S.fr[id]||{name:'…'},c=info(id),l=c&&c.last,un=c&&unreadOf(c);
+    return'<div class="row" style="cursor:pointer" data-a="chat" data-v="'+id+'">'+av(f.name,eff(f),f.photo)+'<span style="flex:1;min-width:0"><b>'+esc(f.name)+'</b><small style="color:var(--mute);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(l?(l.from===me?'Du: ':'')+esc(l.text):'Noch keine Nachrichten')+'</small></span>'+(l?'<span class="m">'+hm(l.at)+'</span>':'')+(un?'<span class="sd" style="margin:0 0 0 8px"></span>':'')+'</div>';
+  }).join('');
+}
+function chatView(){
+  const o=S.chatWith,f=S.fr[o]||{name:'…'},me=S.user.uid;
+  let h='<div class="tr" style="gap:10px;margin-bottom:10px"><button class="btn x" aria-label="Zurück" style="padding:0 8px;font-size:28px" data-a="chatback">‹</button>'+av(f.name,eff(f),f.photo,44)+'<div><b>'+esc(f.name)+'</b><br><small style="color:var(--mute)">'+(S.fr[o]?stText(f):'')+'</small></div></div>';
+  h+='<div style="background:var(--chatbg);border-radius:16px;padding:12px;min-height:50vh">';
+  h+=S.msgs.length?S.msgs.map(m=>{const mine=m.from===me;return'<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin:5px 0"><div style="max-width:78%;padding:8px 12px;border-radius:14px;background:'+(mine?'var(--bme)':'var(--bother)')+';color:'+(mine?'var(--bme-t)':'var(--ink)')+';font-size:15px;word-break:break-word">'+esc(m.text)+'<div style="font-size:12px;color:var(--mute);text-align:right;margin-top:2px">'+hm(m.at)+'</div></div></div>'}).join(''):'<p class="note" style="text-align:center">Noch keine Nachrichten. Frag zum Beispiel, was ihr machen wollt.</p>';
+  h+='</div><div style="height:130px"></div>';
+  h+='<div style="position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px))"><div style="max-width:456px;margin:0 auto"><div class="chips" style="flex-wrap:nowrap;overflow-x:auto;margin:0 0 8px">'+['Was wollen wir machen?','Wo treffen wir uns?','Wann genau?'].map(q=>'<button class="chip" style="flex:none" data-a="quick" data-v="'+q+'">'+q+'</button>').join('')+'</div><div class="tr"><input id="msgIn" data-k="chatDraft" placeholder="Nachricht schreiben" maxlength="500" value="'+esc(S.chatDraft)+'"><button class="btn fill" data-a="send">Senden</button></div></div></div>';
+  return h;
+}
 function render(){
   const v=$('#view');
   if(!S.ready){v.innerHTML='<p class="note">Lädt …</p>';return}
-  $('nav').style.display=S.user?'':'none';
+  $('nav').style.display=S.user&&S.tab!=='chat'?'':'none';
   const pb=$('#push');
-  if(S.banner&&S.user){pb.innerHTML='<b>'+esc(S.banner.name)+' hat Zeit</b><div>'+(S.banner.act>0?'Lust auf '+ACTS[S.banner.act]+'? ':'')+(S.banner.until?'Frei bis '+hm(S.banner.until)+'.':'')+'</div><button class="btn fill" data-a="yes">Bin dabei</button><button class="btn" data-a="no">Heute nicht</button>';pb.classList.add('on')}
+  if(S.banner&&S.user){pb.innerHTML='<b>'+esc(S.banner.name)+' hat Zeit</b><div>'+(S.banner.act?(S.banner.icon?S.banner.icon+' ':'')+'Lust auf '+esc(S.banner.act)+'? ':'')+(S.banner.until?'Frei bis '+hm(S.banner.until)+'.':'')+'</div><button class="btn fill" data-a="yes">Bin dabei</button><button class="btn" data-a="no">Heute nicht</button><button class="btn" data-a="later">Später …</button>';if(S.laterOpen)pb.innerHTML=laterHtml();pb.classList.add('on')}
   else pb.classList.remove('on');
   if(!S.user){
     v.innerHTML='<h1 class="logo">bro</h1><p class="sub">Sag deinen Homies, wann du Zeit hast.</p><div class="f">'+
@@ -201,33 +878,24 @@ function render(){
       '<input data-k="pw" type="password" placeholder="Passwort (mindestens 6 Zeichen)" value="'+esc(S.pw)+'" autocomplete="'+(S.mode==='reg'?'new-password':'current-password')+'">'+
       (S.err?'<p class="note" style="color:var(--busy);margin:0">'+esc(S.err)+'</p>':'')+
       '<button class="btn fill" data-a="submit"'+(S.busy?' disabled':'')+'>'+(S.mode==='reg'?'Registrieren':'Anmelden')+'</button>'+
-      '<button class="btn x" style="font-size:15px" data-a="mode">'+(S.mode==='reg'?'Schon ein Konto? Anmelden':'Neu hier? Konto erstellen')+'</button></div>';
+      (S.mode==='login'?'<button class="btn x" style="font-size:15px" data-a="reset">Passwort vergessen?</button>':'')+'<button class="btn x" style="font-size:15px" data-a="mode">'+(S.mode==='reg'?'Schon ein Konto? Anmelden':'Neu hier? Konto erstellen')+'</button></div>';
     return;
   }
   const me=S.me;
   if(!me){v.innerHTML='<h1 class="logo">bro</h1><p class="note">'+esc(S.err||'Profil wird eingerichtet …')+'</p><button class="btn" data-a="out">Abmelden</button>';return}
-  const s=eff(me);
+  const s=eff(me),foc=document.activeElement&&document.activeElement.id==='msgIn';
   let h='';
-  if(S.tab==='home'){
-    const free=s==='free',line=free?'Du bist verfügbar'+(me.freeUntil?' bis '+hm(me.freeUntil):''):s==='busy'?'Du bist als beschäftigt gemeldet':'Eventuell verfügbar, noch nicht gemeldet';
-    h='<h1 class="logo">bro</h1><p class="sub">Hallo '+esc(me.name)+'!</p><div class="hero"><button class="big'+(free?' on':'')+'" data-a="press">'+(free?'Du hast Zeit<small>Tippen zum Beenden</small>':'Ich hab Zeit<small>Homies sehen es sofort</small>')+'</button><p class="status"><span class="sd '+s+'"></span>'+line+'</p></div>';
-    if(free){
-      const rs=S.replies.filter(r=>r.since===me.freeSince);
-      h+='<h2>Wer ist dabei?</h2>'+(rs.length?rs.map(r=>'<div class="row">'+av(r.name,r.ok?'free':'busy')+'<b>'+esc(r.name)+'</b><span class="m">'+(r.ok?'Bin dabei':'Heute nicht')+'</span></div>').join(''):'<p class="note">Warte auf Antworten …</p>');
-    }else h+='<p class="lbl">Wie lange?</p>'+chips(DURS,S.dur,'dur')+'<p class="lbl">Worauf hast du Lust?</p>'+chips(ACTS,S.act,'act')+'<button class="btn" style="margin-top:22px" data-a="busy">'+(s==='busy'?'Doch nicht beschäftigt':'Ich bin beschäftigt')+'</button>';
-  }else{
-    const ids=Object.keys(S.pairs),rank={free:0,maybe:1,busy:2};
-    ids.sort((a,b)=>rank[eff(S.fr[a])]-rank[eff(S.fr[b])]);
-    const n=ids.filter(id=>eff(S.fr[id])==='free').length;
-    h='<h1 class="logo">Homies</h1><p class="sub">'+(ids.length?n+' von '+ids.length+' sind verfügbar.':'Noch keine Homies.')+'</p>'+
-      '<p class="lbl" style="margin:0">So sehen dich deine Homies</p><div class="row">'+av('Du',s)+'<b>Du</b><span class="m">'+stText(me)+'</span></div><p class="lbl">Deine Homies</p>'+
-      (ids.length?ids.map(id=>{const f=S.fr[id]||{name:'…'};return'<div class="row">'+av(f.name,eff(f))+'<b>'+esc(f.name)+'</b><span class="m">'+(S.fr[id]?stText(f):'')+'</span><button class="btn x" aria-label="Homie entfernen" data-a="rm" data-v="'+id+'">×</button></div>'}).join(''):'<p class="note" style="margin-top:6px">Schick deinen Code an einen Freund oder gib unten seinen Code ein.</p>')+
-      '<h2>Homie hinzufügen</h2><div class="tr"><input data-k="codeIn" placeholder="Code, zum Beispiel BRO-AB12" value="'+esc(S.codeIn)+'" autocapitalize="characters"><button class="btn fill" data-a="add">Hinzufügen</button></div>'+
-      '<h2>Dein Code</h2><p class="note" style="margin-top:0">Schick ihn deinen Homies, dann können sie dich hinzufügen.</p><div class="code">'+esc(me.code)+'</div><button class="btn fill" data-a="copy">Code kopieren</button>'+
-      '<h2>Konto</h2><button class="btn" data-a="out">Abmelden</button>';
-  }
+  if(S.tab==='home')h=homeView(me,s);
+  else if(S.tab==='friends')h=friendsView(me,s);
+  else if(S.tab==='chats')h=chatsView();
+  else if(S.tab==='chat'&&S.chatWith)h=chatView();
+  else if(S.tab==='events')h=evView();
+  else if(S.tab==='cal')h=calView();
+  else if(S.tab==='settings')h=settingsView();
   v.innerHTML=h;
-  $('#tabs').innerHTML=[['home','Start'],['friends','Homies']].map(t=>'<button class="'+(S.tab===t[0]?'on':'')+'" data-a="tab" data-v="'+t[0]+'">'+t[1]+'</button>').join('');
+  if(foc){const i=document.getElementById('msgIn');if(i){i.focus();try{i.setSelectionRange(i.value.length,i.value.length)}catch(e){}}}
+  const un=S.chats.filter(unreadOf).length;
+  $('#tabs').innerHTML=[['home','Start'],['friends','Homies'],['events','Events'],['cal','Kalender'],['chats','Chats']].map(t=>'<button class="'+(S.tab===t[0]||(t[0]==='chats'&&S.tab==='chat')?'on':'')+'" data-a="tab" data-v="'+t[0]+'">'+navIcon(t[0])+'<span>'+t[1]+(t[0]==='chats'&&un?' <i class="sd" style="margin:0 0 0 2px"></i>':'')+'</span></button>').join('');
 }
 render();
 </script>
